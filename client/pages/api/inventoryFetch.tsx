@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { InsertInventory } from "@/types/inventory";
 
-const BASE_URL = "http://localhost:3005";
+const BASE_URL = "https://itransition-thesis-work.onrender.com/";
 
 export const getAllInventories = async () => {
   const response = await axios.get(`${BASE_URL}/inventories`);
