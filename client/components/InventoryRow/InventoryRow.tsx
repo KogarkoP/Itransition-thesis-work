@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "./InventoryRow.module.css";
 import Link from "next/link";
 
@@ -20,6 +21,7 @@ const InventoryRow = ({
   inventoriesIds,
   setInventoriesIds,
 }: InventoryRowProps) => {
+  const { t } = useTranslation();
   const creationTime = new Date(createdAt).toLocaleDateString(undefined, {
     year: "numeric",
     month: "2-digit",
@@ -54,7 +56,7 @@ const InventoryRow = ({
           {title}
         </Link>
       </td>
-      <td>{category}</td>
+      <td>{t(category)}</td>
       <td>{creationTime}</td>
       <td>{updateTime}</td>
     </tr>
