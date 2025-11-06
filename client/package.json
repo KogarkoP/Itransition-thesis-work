@@ -30,13 +30,10 @@
     "react-tabs": "^6.1.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.5",
     "typescript": "^5"
   }
 }
