@@ -75,6 +75,7 @@ const GeneralSettings = ({
         inventory.id,
         inventoryUpdate
       );
+
       if (response.status === 200) {
         setCreated(true);
         setTimeout(() => setCreated(false), 3000);
