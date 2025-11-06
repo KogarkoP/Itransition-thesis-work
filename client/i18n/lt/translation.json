@@ -102,5 +102,6 @@
   "priceGreaterThanZero": "Kaina turi būti didesnė už 0",
   "priceMustBeNumber": "Kaina turi būti skaičius",
   "save": "Išsaugoti",
-  "changesSaved": "Pakeitimai išsaugoti"
+  "changesSaved": "Pakeitimai išsaugoti",
+  "loginRequired": "Norint tvarkyti nustatymus, turite prisijungti"
 }

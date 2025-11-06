@@ -21,6 +21,7 @@ import { deleteItemsByIds, getAllItems } from "../api/itemsFetch";
 import { Item } from "@/types/item";
 import ItemForm from "@/components/ItemForm/ItemForm";
 import GeneralSettings from "@/components/GeneralSettings";
+import { Alert } from "@mui/material";
 
 const InventoryPage = () => {
   const { t, i18n } = useTranslation();
@@ -265,13 +266,17 @@ const InventoryPage = () => {
             <h2>Any content 2</h2>
           </TabPanel>
           <TabPanel>
-            {inventory && (
-              <GeneralSettings
-                inventory={inventory}
-                isCreated={isCreated}
-                setCreated={setCreated}
-                fetchInventory={fetchInventory}
-              />
+            {!isLoggedIn ? (
+              <Alert severity="error">{t("loginRequired")}</Alert>
+            ) : (
+              inventory && (
+                <GeneralSettings
+                  inventory={inventory}
+                  isCreated={isCreated}
+                  setCreated={setCreated}
+                  fetchInventory={fetchInventory}
+                />
+              )
             )}
           </TabPanel>
         </Tabs>

@@ -27,7 +27,7 @@ const GeneralSettings = ({
   fetchInventory,
 }: GeneralSettingsProps) => {
   const { t } = useTranslation();
-  const { isDarkMode } = useTheme();
+  const { isDarkMode, isLoggedIn } = useTheme();
   const [title, setTitle] = useState(inventory.title);
   const [description, setDescription] = useState(inventory.description);
   const [category, setCategory] = useState<Option | null>();
@@ -76,15 +76,16 @@ const GeneralSettings = ({
         inventoryUpdate
       );
 
+      const data = response.data.inventory;
+
       if (response.status === 200) {
         setCreated(true);
         setTimeout(() => setCreated(false), 3000);
+        fetchInventory(inventory.id);
+        setTitle(data.title);
+        setCategory(categories.find((c) => c.value === data.category));
+        setDescription(data.description);
       }
-
-      setTitle("");
-      setCategory(null);
-      setDescription("");
-      fetchInventory(inventory.id);
     } catch (err) {
       console.log(err);
     }
@@ -173,7 +174,11 @@ const GeneralSettings = ({
             {descriptionPreview}
           </div>
         </div>
-        <Button className={styles.add_btn} onClick={onSubmit}>
+        <Button
+          disabled={!isLoggedIn}
+          className={styles.add_btn}
+          onClick={onSubmit}
+        >
           {t("save")}
         </Button>
         {isCreated && (
