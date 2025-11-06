@@ -1,0 +1,152 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  flex: 1;
+  position: relative;
+}
+
+.items_table h2 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+  padding: 12px;
+  background-color: var(--toolbar-bg-color);
+  margin-bottom: 1rem;
+}
+
+.buttons_wrapper li:first-child button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.buttons_wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.buttons_wrapper .insert_btn {
+  background-color: var(--but-bg-color);
+  border-color: var(--but-border-color);
+}
+
+.buttons_wrapper .insert_btn:hover {
+  background-color: var(--but-bghover-color);
+  border-color: var(--but-borderho-color);
+}
+
+.inventories_table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table_heading td {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.filter_select {
+  width: 160px;
+  font-size: 15px;
+}
+
+.checkbox_con {
+  width: 40px;
+  position: relative;
+}
+
+.checkbox_con input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #555;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  outline: none;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.checkbox_con input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.checkbox_con input[type="checkbox"]:checked::after {
+  content: "✔";
+  font-weight: 700;
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inventory_filter {
+  width: 160px;
+  font-size: 15px;
+}
+
+.notification_wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.nothing_found_con {
+  margin-top: 3rem;
+  position: relative;
+}
+
+.nothing_found_con .search_icon {
+  width: 100px;
+  height: 100px;
+}
+
+.nothing_found_con .question_icon {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+}
+
+.notification_wrapper p {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.dark :global(.react-tabs__tab-list) {
+  border-bottom: 1px solid #444;
+}
+
+.dark :global(.react-tabs__tab--selected) {
+  color: white;
+  background: var(--tab-bg-color);
+  border-color: #555;
+}
+
+.main :global(.react-tabs__tab:focus:after) {
+  display: none !important;
+}
+
+.description_wrapper {
+  margin-bottom: 1.25rem;
+}

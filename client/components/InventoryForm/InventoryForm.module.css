@@ -1,0 +1,130 @@
+.form_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.25rem;
+  max-height: 100vh;
+}
+
+.form_row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.form_row input:focus {
+  outline: none;
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
+}
+
+.form_row .title_input {
+  min-height: 38px;
+  background-color: var(--input-bg-color);
+  border-color: var(--input-border-color);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0 10px;
+  outline: none;
+}
+
+.form_row .title_input:hover,
+.form_row .description_input:hover {
+  border-color: #b3b3b3;
+}
+
+.form_row .title_input:focus,
+.form_row .description_input:focus {
+  border-color: #2684ff;
+  box-shadow: 0 0 0 1px #2684ff;
+}
+
+.form_row .description_input {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: var(--input-bg-color);
+  border-color: var(--input-border-color);
+  padding: 10px;
+  resize: none;
+  outline: none;
+  transition: all 0.1s;
+  height: 150px;
+}
+
+.description_preview {
+  word-break: break-word;
+  padding: 0 10px;
+  list-style: none;
+  max-height: 150px;
+  overflow: auto;
+}
+
+.form_row label,
+.description_preview_heading {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.description_preview_heading {
+  margin-bottom: 0;
+}
+
+.form_row .required {
+  color: red;
+  margin-left: 3px;
+  cursor: help;
+}
+
+.form_wrapper button {
+  margin-top: 1rem;
+}
+
+.close_btn {
+  text-align: right;
+  margin-bottom: -10px;
+}
+
+.close_btn svg {
+  font-size: 35px;
+  transition: rotate 2s ease-in-out;
+  cursor: pointer;
+}
+
+.close_btn svg:hover {
+  rotate: 720deg;
+}
+
+.add_btn {
+  background-color: #1c475a !important;
+  border-color: #1c475a !important;
+}
+
+.add_btn:hover {
+  background-color: #13aff0 !important;
+  border-color: #13aff0 !important;
+}
+
+.success {
+  text-align: center;
+  color: green;
+  font-size: 19px;
+  margin-top: 0.5rem;
+}
+
+.success svg {
+  font-size: 27px;
+  margin-left: 10px;
+}
+
+.field_error {
+  color: red;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  margin-bottom: 0;
+}

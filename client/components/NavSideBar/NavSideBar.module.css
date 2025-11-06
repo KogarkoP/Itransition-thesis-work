@@ -1,0 +1,77 @@
+.content_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  min-height: 100vh;
+  background-color: var(--nav-bg-color);
+  flex: 1;
+}
+
+.logo_wrapper {
+  display: flex;
+  height: 75px;
+  width: 100%;
+}
+
+.logo_wrapper svg {
+  height: 30px;
+  width: 30px;
+}
+
+.home_link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+  transition: 0.3s ease-in-out;
+  padding: 1rem;
+}
+
+.home_link:hover {
+  scale: 1.03;
+  background-color: white;
+  color: black;
+}
+
+.home_link span {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav_wrapper li {
+  padding: 1rem;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 15px;
+}
+
+.nav_wrapper li:hover {
+  color: var(--text-hover-color);
+  background-color: white;
+}
+
+.not_allowed {
+  cursor: pointer;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.message svg {
+  color: red;
+  font-size: 60px;
+}
+
+.message p {
+  font-weight: 500;
+  color: red;
+  line-height: 21px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}

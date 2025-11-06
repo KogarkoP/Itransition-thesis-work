@@ -1,0 +1,14 @@
+.content_wrapper {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar_wrapper {
+  display: flex;
+  grid-column: 1/2;
+}
+
+.wrapper {
+  grid-column: 2 / 10;
+}

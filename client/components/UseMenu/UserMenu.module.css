@@ -1,0 +1,75 @@
+.close_btn {
+  text-align: right;
+}
+
+.close_btn svg {
+  font-size: 35px;
+  transition: rotate 2s ease-in-out;
+  cursor: pointer;
+}
+
+.close_btn svg:hover {
+  rotate: 720deg;
+}
+
+.user_menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  max-width: 350px;
+  padding: 1rem;
+  width: 100%;
+  height: 100vh;
+  z-index: 99;
+  background-color: var(--nav-bg-color);
+}
+
+.user_menu label {
+  text-align: left;
+  font-weight: 500;
+}
+
+.logout_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background-color: var(--but-bg-color);
+  border-color: var(--but-border-color);
+}
+
+.logout_btn:hover {
+  background-color: var(--but-bghover-color);
+  border-color: var(--but-borderho-color);
+}
+
+.login_btn svg,
+.logout_btn svg {
+  font-size: 21px;
+}
+
+.theme_select_wrapper,
+.language_select_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.user_data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.user_data p {
+  margin-bottom: 0;
+}
+
+.user_data_title {
+  margin-right: 10px;
+  font-weight: 500;
+}
