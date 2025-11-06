@@ -19,7 +19,7 @@ router.get("/", GET_ALL_INVENTORIES);
 router.get("/:id", GET_INVENTORY_BY_ID);
 router.put("/:id", auth, UPDATE_INVENTORY_BY_ID);
 router.put(
-  "settings/:id",
+  "/settings/:id",
   validate(inventorySettingsSchema),
   auth,
   UPDATE_INVENTORY_SETTINGS_BY_ID
