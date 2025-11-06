@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { UserInsert, UpdateUsers, UpdateUser } from "@/types/user";
 
-const BASE_URL = "https://itransition-thesis-work.onrender.com/";
+const BASE_URL = "https://itransition-thesis-work.onrender.com";
 
 export const insertUser = async (user: UserInsert) => {
   const response = await axios.post(`${BASE_URL}/users/register`, user);
