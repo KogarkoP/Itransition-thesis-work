@@ -52,7 +52,7 @@
   "tools": "Įrankiai",
   "clothing": "Drabužiai",
   "foodBeverage": "Maistas ir gėrimai",
-  "cleaningSupplies": "Valymo priemonės",
+  "cleaning": "Valymo priemonės",
   "others": "Kita",
   "select": "Pasirinkite...",
   "hi": "Sveiki",
@@ -100,5 +100,7 @@
   "chat": "Pokalbis",
   "generalSettings": "Bendrieji nustatymai",
   "priceGreaterThanZero": "Kaina turi būti didesnė už 0",
-  "priceMustBeNumber": "Kaina turi būti skaičius"
+  "priceMustBeNumber": "Kaina turi būti skaičius",
+  "save": "Išsaugoti",
+  "changesSaved": "Pakeitimai išsaugoti"
 }

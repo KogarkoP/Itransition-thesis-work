@@ -52,7 +52,7 @@
   "tools": "Инструменты",
   "clothing": "Одежда",
   "foodBeverage": "Продукты и напитки",
-  "cleaningSupplies": "Чистящие средства",
+  "cleaning": "Чистящие средства",
   "others": "Прочее",
   "select": "Выберите...",
   "hi": "Привет",
@@ -100,5 +100,7 @@
   "chat": "Чат",
   "generalSettings": "Общие настройки",
   "priceGreaterThanZero": "Цена должна быть больше 0",
-  "priceMustBeNumber": "Цена должна быть числом"
+  "priceMustBeNumber": "Цена должна быть числом",
+  "save": "Сохранить",
+  "changesSaved": "Изменения сохранены"
 }

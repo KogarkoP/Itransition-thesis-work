@@ -15,3 +15,9 @@ export type Inventory = {
   createdBy: string;
   items: string[];
 };
+
+export type InventorySettings = {
+  title: string;
+  description: string;
+  category: string;
+};

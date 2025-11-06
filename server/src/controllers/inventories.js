@@ -108,6 +108,36 @@ export const UPDATE_INVENTORY_BY_ID = async (req, res) => {
   }
 };
 
+export const UPDATE_INVENTORY_SETTINGS_BY_ID = async (req, res) => {
+  const inventoryId = req.params.id;
+  const title = req.body.title;
+  const description = req.body.description;
+  const category = req.body.category;
+
+  if (!inventoryId) {
+    return res.status(404).json({
+      message: "Inventory id is not provided",
+    });
+  }
+
+  const updatedInventorySettings = await inventoryModel.findOneAndUpdate(
+    { id: inventoryId },
+    { $set: { title: title, description: description, category: category } },
+    { new: true }
+  );
+
+  if (!updatedInventorySettings) {
+    return res.status(404).json({
+      message: "Inventory does not exist",
+    });
+  }
+
+  return res.status(200).json({
+    message: "Inventory updated successfully",
+    inventory: updatedInventorySettings,
+  });
+};
+
 export const DELETE_INVENTORIES_BY_IDS = async (req, res) => {
   try {
     const { ids } = req.body;

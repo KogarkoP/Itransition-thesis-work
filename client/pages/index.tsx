@@ -122,7 +122,7 @@ const MainPage = () => {
             <li>
               <Button
                 className="btn btn-danger"
-                disabled={!isLoggedIn}
+                disabled={!isLoggedIn || inventoriesIds.length <= 0}
                 onClick={() => deleteInventories(inventoriesIds)}
               >
                 <Icon.Trash3Fill />

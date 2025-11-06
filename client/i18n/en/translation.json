@@ -52,7 +52,7 @@
   "tools": "Tools",
   "clothing": "Clothing",
   "foodBeverage": "Food & Beverage",
-  "cleaningSupplies": "Cleaning Supplies",
+  "cleaning": "Cleaning Supplies",
   "others": "Others",
   "select": "Select...",
   "hi": "Hi",
@@ -100,5 +100,7 @@
   "chat": "Chat",
   "generalSettings": "General Settings",
   "priceGreaterThanZero": "Price must be greater than 0",
-  "priceMustBeNumber": "Price must be a number"
+  "priceMustBeNumber": "Price must be a number",
+  "save": "Save",
+  "changesSaved": "Changes saved"
 }

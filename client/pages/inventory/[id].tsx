@@ -20,6 +20,7 @@ import { selectStyles } from "@/styles/selectStyle";
 import { deleteItemsByIds, getAllItems } from "../api/itemsFetch";
 import { Item } from "@/types/item";
 import ItemForm from "@/components/ItemForm/ItemForm";
+import GeneralSettings from "@/components/GeneralSettings";
 
 const InventoryPage = () => {
   const { t, i18n } = useTranslation();
@@ -92,6 +93,11 @@ const InventoryPage = () => {
     }
   };
 
+  const fetchInventory = async (id: string) => {
+    const response = await getInventoryById(id);
+    setInventory(response.data.inventory);
+  };
+
   const deleteItems = async (ids: string[]) => {
     try {
       await deleteItemsByIds(ids);
@@ -123,11 +129,6 @@ const InventoryPage = () => {
   }, [inventory]);
 
   useEffect(() => {
-    const fetchInventory = async (id: string) => {
-      const response = await getInventoryById(id);
-      setInventory(response.data.inventory);
-    };
-
     if (router.query.id) {
       fetchInventory(router.query.id as string);
     }
@@ -190,7 +191,7 @@ const InventoryPage = () => {
                 <li>
                   <Button
                     className="btn btn-danger"
-                    disabled={!isLoggedIn}
+                    disabled={!isLoggedIn || itemsIds.length <= 0}
                     onClick={() => deleteItems(itemsIds)}
                   >
                     <Icon.Trash3Fill />
@@ -264,7 +265,14 @@ const InventoryPage = () => {
             <h2>Any content 2</h2>
           </TabPanel>
           <TabPanel>
-            <h2>Any content 3</h2>
+            {inventory && (
+              <GeneralSettings
+                inventory={inventory}
+                isCreated={isCreated}
+                setCreated={setCreated}
+                fetchInventory={fetchInventory}
+              />
+            )}
           </TabPanel>
         </Tabs>
       </div>

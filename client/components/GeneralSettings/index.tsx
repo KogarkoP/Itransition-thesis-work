@@ -1,36 +1,36 @@
-import styles from "./InventoryForm.module.css";
-import { insertInventory } from "@/pages/api/inventoryFetch";
-import { useState } from "react";
-import ModalTemplate from "../ModalTemplate/ModalTemplate";
+import { useEffect, useState } from "react";
+import styles from "./GeneralSettings.module.css";
+import { Inventory } from "@/types/inventory";
 import { useTranslation } from "react-i18next";
-import { Option } from "@/types/selectOption";
-import Select, { SingleValue } from "react-select";
-import { Button } from "react-bootstrap";
-import { useTheme } from "@/context/themeContext";
 import { selectStyles } from "@/styles/selectStyle";
+import Select, { SingleValue } from "react-select";
 import { marked } from "marked";
+import { Option } from "@/types/selectOption";
 import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 import * as Icon from "react-bootstrap-icons";
+import { Button } from "react-bootstrap";
+import { useTheme } from "@/context/themeContext";
+import { updateInventorySettingsByID } from "@/pages/api/inventoryFetch";
 
-type InventoryFormProps = {
+type GeneralSettingsProps = {
+  inventory: Inventory;
   isCreated: boolean;
   setCreated: (value: boolean) => void;
-  toggleForm: () => void;
-  fetchInventories: () => void;
+  fetchInventory: (value: string) => void;
 };
 
-const InventoryForm = ({
+const GeneralSettings = ({
+  inventory,
   isCreated,
   setCreated,
-  toggleForm,
-  fetchInventories,
-}: InventoryFormProps) => {
+  fetchInventory,
+}: GeneralSettingsProps) => {
   const { t } = useTranslation();
   const { isDarkMode } = useTheme();
-  const [title, setTitle] = useState<string>("");
-  const [category, setCategory] = useState<Option | null>(null);
-  const [description, setDescription] = useState<string>("");
+  const [title, setTitle] = useState(inventory.title);
+  const [description, setDescription] = useState(inventory.description);
+  const [category, setCategory] = useState<Option | null>();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const rawHtml = marked(description || `_${t("nothingToPreview")}_`) as string;
   const cleanHtml = DOMPurify.sanitize(rawHtml);
@@ -65,18 +65,17 @@ const InventoryForm = ({
         return;
       }
 
-      const createdBy = localStorage.getItem("userId");
-      if (!createdBy) return;
-
-      const inventory = {
+      const inventoryUpdate = {
         title: title,
-        category: category!.value,
-        createdBy: createdBy,
         description: (description || "").trim(),
+        category: category!.value,
       };
 
-      const response = await insertInventory(inventory);
-      if (response.status === 201) {
+      const response = await updateInventorySettingsByID(
+        inventory.id,
+        inventoryUpdate
+      );
+      if (response.status === 200) {
         setCreated(true);
         setTimeout(() => setCreated(false), 3000);
       }
@@ -84,18 +83,26 @@ const InventoryForm = ({
       setTitle("");
       setCategory(null);
       setDescription("");
-      fetchInventories();
+      fetchInventory(inventory.id);
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    if (!inventory) {
+      return;
+    }
+
+    const matchedCategory = categories.find(
+      (c) => c.value === inventory.category
+    );
+    setCategory(matchedCategory);
+  }, []);
+
   return (
-    <ModalTemplate>
-      <div className={styles.form_wrapper}>
-        <div className={styles.close_btn}>
-          <Icon.X onClick={() => toggleForm()} />
-        </div>
+    <div className={styles.main}>
+      <div className={styles.settings_wrapper}>
         <div className={styles.form_row}>
           <label htmlFor="title">
             {t("title")}
@@ -157,6 +164,8 @@ const InventoryForm = ({
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+      </div>
+      <div className={styles.description_preview_wrapper}>
         <div className={styles.form_row}>
           <h4 className={styles.description_preview_heading}>{t("preview")}</h4>
           <div id="description_preview" className={styles.description_preview}>
@@ -164,17 +173,17 @@ const InventoryForm = ({
           </div>
         </div>
         <Button className={styles.add_btn} onClick={onSubmit}>
-          {t("add")}
+          {t("save")}
         </Button>
         {isCreated && (
           <p className={styles.success}>
-            {t("success")}
+            {t("changesSaved")}
             <Icon.CheckCircle />
           </p>
         )}
       </div>
-    </ModalTemplate>
+    </div>
   );
 };
 
-export default InventoryForm;
+export default GeneralSettings;

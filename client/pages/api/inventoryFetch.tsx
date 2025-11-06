@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { InsertInventory } from "@/types/inventory";
+import { InsertInventory, InventorySettings } from "@/types/inventory";
 
 const BASE_URL = "https://itransition-thesis-work.onrender.com";
 
@@ -31,6 +31,22 @@ export const updateInventoryById = async (
   const response = await axios.put(
     `${BASE_URL}/inventories/${id}`,
     { itemsIds, userOption },
+    {
+      headers: { Authorization: jwt },
+    }
+  );
+
+  return response;
+};
+
+export const updateInventorySettingsByID = async (
+  id: string,
+  inventorySettings: InventorySettings
+) => {
+  const jwt = Cookies.get("@user_jwt");
+  const response = await axios.put(
+    `${BASE_URL}/inventories/settings/${id}`,
+    inventorySettings,
     {
       headers: { Authorization: jwt },
     }
