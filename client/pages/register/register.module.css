@@ -30,3 +30,15 @@
   background-color: #13aff0;
   border-color: #13aff0;
 }
+
+@media (max-width: 840px) {
+  .main {
+    justify-content: unset;
+  }
+  .back_btn_wrapper {
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+}

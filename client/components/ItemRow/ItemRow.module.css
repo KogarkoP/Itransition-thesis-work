@@ -56,3 +56,10 @@
 .id_link:hover {
   color: #007bff;
 }
+
+@media (max-width: 767px) {
+  .data_row td {
+    padding: 5px;
+    font-size: 13px;
+  }
+}

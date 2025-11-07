@@ -144,10 +144,10 @@ const MainPage = () => {
           </ul>
         </div>
         {filteredInventories && filteredInventories.length > 0 ? (
-          <Table className={styles.inventories_table}>
+          <Table responsive className={styles.inventories_table}>
             <thead>
               <tr className={styles.table_heading}>
-                <td className={styles.checkbox_con}>
+                <th className={styles.checkbox_con}>
                   <input
                     type="checkbox"
                     id="select_all"
@@ -159,12 +159,12 @@ const MainPage = () => {
                     }
                     onChange={toggleCheckboxes}
                   />
-                </td>
-                <td>{t("id")}</td>
-                <td>{t("title")}</td>
-                <td>{t("category")}</td>
-                <td>{t("createdAt")}</td>
-                <td>{t("lastUpdate")}</td>
+                </th>
+                <th>{t("id")}</th>
+                <th>{t("title")}</th>
+                <th>{t("category")}</th>
+                <th>{t("createdAt")}</th>
+                <th>{t("lastUpdate")}</th>
               </tr>
             </thead>
             <tbody>

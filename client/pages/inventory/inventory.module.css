@@ -47,9 +47,10 @@
 .inventories_table {
   width: 100%;
   table-layout: fixed;
+  min-width: 800px;
 }
 
-.table_heading td {
+.table_heading th {
   font-weight: 700;
   font-size: 17px;
 }
@@ -144,7 +145,11 @@
 }
 
 .main :global(.react-tabs__tab:focus:after) {
-  display: none !important;
+  display: none;
+}
+
+.main :global(.react-tabs__tab) {
+  font-weight: 500;
 }
 
 .description_wrapper {
@@ -160,7 +165,7 @@
     padding: 5px;
   }
 
-  .table_heading td {
+  .table_heading th {
     padding: 5px 3px;
     font-size: 15px;
   }

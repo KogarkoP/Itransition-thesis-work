@@ -67,6 +67,12 @@
   border-color: var(--but-borderho-color);
 }
 
+@media (max-width: 767px) {
+  .header_wrapper {
+    padding: 1rem;
+  }
+}
+
 @media (max-width: 580px) {
   .header_wrapper {
     flex-direction: column;

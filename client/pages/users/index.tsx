@@ -238,7 +238,7 @@ const UsersPage = () => {
           <Table responsive className={styles.users_table}>
             <thead>
               <tr className={styles.table_heading}>
-                <td className={styles.checkbox_con}>
+                <th className={styles.checkbox_con}>
                   <input
                     type="checkbox"
                     id="select_all"
@@ -250,12 +250,12 @@ const UsersPage = () => {
                       toggleCheckboxes();
                     }}
                   />
-                </td>
-                <td>{t("name")}</td>
-                <td>{t("email")}</td>
-                <td>{t("role")}</td>
-                <td>{t("status")}</td>
-                <td>{t("lastSeen")}</td>
+                </th>
+                <th>{t("name")}</th>
+                <th>{t("email")}</th>
+                <th>{t("role")}</th>
+                <th>{t("status")}</th>
+                <th>{t("lastSeen")}</th>
               </tr>
             </thead>
             <tbody>

@@ -37,9 +37,10 @@
 .users_table {
   width: 100%;
   table-layout: fixed;
+  min-width: 800px;
 }
 
-.table_heading td {
+.table_heading th {
   font-weight: 700;
   font-size: 17px;
 }
@@ -138,7 +139,7 @@
     padding: 5px;
   }
 
-  .table_heading td {
+  .table_heading th {
     padding: 5px 3px;
     font-size: 15px;
   }
