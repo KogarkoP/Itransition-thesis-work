@@ -9,8 +9,15 @@ import UserMenu from "../UseMenu/UserMenu";
 import { getUserById } from "@/pages/api/userFetch";
 import { Option, Object } from "@/types/selectOption";
 import { useTheme } from "@/context/themeContext";
+import NavSideBar from "../NavSideBar/NavSideBar";
 
-const Header = () => {
+type HeaderProps = {
+  width: number;
+  isNavSideBar: boolean;
+  toggleNavSideBar: () => void;
+};
+
+const Header = ({ width, isNavSideBar, toggleNavSideBar }: HeaderProps) => {
   const { t, i18n } = useTranslation();
   const { setDarkMode, isLoggedIn, setLoggedIn } = useTheme();
   const [isMounted, setMounted] = useState(false);
@@ -94,6 +101,19 @@ const Header = () => {
 
   return (
     <div className={styles.header_wrapper}>
+      {width < 1024 && (
+        <div className={styles.nav_bar_btn_wrapper}>
+          <Button
+            className={styles.nav_side_bar_btn}
+            onClick={toggleNavSideBar}
+          >
+            <Icon.List />
+          </Button>
+        </div>
+      )}
+      {width < 1024 && isNavSideBar && (
+        <NavSideBar width={width} toggleNavSideBar={toggleNavSideBar} />
+      )}
       <div className={styles.search_wrapper}>
         <input
           type="text"

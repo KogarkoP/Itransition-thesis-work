@@ -26,7 +26,7 @@ const GeneralSettings = ({
   setCreated,
   fetchInventory,
 }: GeneralSettingsProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { isDarkMode, isLoggedIn } = useTheme();
   const [title, setTitle] = useState(inventory.title);
   const [description, setDescription] = useState(inventory.description);
@@ -101,6 +101,17 @@ const GeneralSettings = ({
     );
     setCategory(matchedCategory);
   }, []);
+
+  useEffect(() => {
+    setCategory((prev) => {
+      if (!prev) return prev;
+
+      return {
+        ...prev,
+        label: t(prev.value),
+      };
+    });
+  }, [i18n.language, t]);
 
   return (
     <div className={styles.main}>

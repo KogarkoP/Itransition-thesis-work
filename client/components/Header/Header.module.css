@@ -46,8 +46,48 @@
   border-color: var(--but-border-color);
 }
 
+.nav_bar_btn_wrapper {
+  margin-right: 20px;
+}
+
+.nav_side_bar_btn {
+  background-color: var(--but-bg-color);
+  border-color: var(--but-border-color);
+}
+
+.nav_side_bar_btn svg {
+  font-size: 21px;
+  color: #fff;
+}
+
 .login_btn:hover,
-.user_menu_btn:hover {
+.user_menu_btn:hover,
+.nav_side_bar_btn:hover {
   background-color: var(--but-bghover-color);
   border-color: var(--but-borderho-color);
+}
+
+@media (max-width: 580px) {
+  .header_wrapper {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .user_con {
+    order: 1;
+  }
+
+  .search_wrapper {
+    order: 2;
+  }
+
+  .nav_bar_btn_wrapper {
+    position: absolute;
+    margin-right: 0;
+  }
+
+  .header_wrapper input {
+    width: 100%;
+  }
 }

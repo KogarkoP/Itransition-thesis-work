@@ -97,57 +97,64 @@ const UserMenu = ({
   }, [i18n.language, t]);
 
   return (
-    <div className={styles.user_menu}>
-      <div className={styles.close_btn}>
-        <Icon.X onClick={toggleUserMenu} />
+    <div onClick={toggleUserMenu} className={styles.user_menu_wrapper}>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className={styles.user_menu}
+      >
+        <div className={styles.close_btn}>
+          <Icon.X onClick={toggleUserMenu} />
+        </div>
+        <div className={styles.user_data}>
+          <p>
+            <span className={styles.user_data_title}> {t("name")}:</span>
+            {user.name}
+          </p>
+          <p>
+            <span className={styles.user_data_title}>{t("email")}:</span>
+            {user.email}
+          </p>
+          <p>
+            <span className={styles.user_data_title}>{t("verified")}:</span>
+            {user.isVerified ? t("yes") : t("no")}
+          </p>
+          <p>
+            <span className={styles.user_data_title}>{t("role")}:</span>
+            {t(`${user.role}`)}
+          </p>
+        </div>
+        <div className={styles.theme_select_wrapper}>
+          <label htmlFor="theme">{t("selectTheme")}</label>
+          <Select<Option, false>
+            inputId="theme"
+            className={`${styles.theme_select} ${styles.select}`}
+            value={theme}
+            onChange={changeTheme}
+            options={themeOptions}
+            isClearable={false}
+            isSearchable={false}
+            styles={selectStyles(isDarkMode)}
+          />
+        </div>
+        <div className={styles.language_select_wrapper}>
+          <label htmlFor="language">{t("selectLanguage")}</label>
+          <Select<Option, false>
+            inputId="language"
+            className={`${styles.language_select} ${styles.select}`}
+            value={selectedOption}
+            onChange={changeLanguage}
+            options={languages}
+            isClearable={false}
+            isSearchable={false}
+            styles={selectStyles(isDarkMode)}
+          />
+        </div>
+        <Button className={styles.logout_btn} onClick={onLogout}>
+          {t("logout")} <Icon.BoxArrowRight />
+        </Button>
       </div>
-      <div className={styles.user_data}>
-        <p>
-          <span className={styles.user_data_title}> {t("name")}:</span>
-          {user.name}
-        </p>
-        <p>
-          <span className={styles.user_data_title}>{t("email")}:</span>
-          {user.email}
-        </p>
-        <p>
-          <span className={styles.user_data_title}>{t("verified")}:</span>
-          {user.isVerified ? t("yes") : t("no")}
-        </p>
-        <p>
-          <span className={styles.user_data_title}>{t("role")}:</span>
-          {t(`${user.role}`)}
-        </p>
-      </div>
-      <div className={styles.theme_select_wrapper}>
-        <label htmlFor="theme">{t("selectTheme")}</label>
-        <Select<Option, false>
-          inputId="theme"
-          className={`${styles.theme_select} ${styles.select}`}
-          value={theme}
-          onChange={changeTheme}
-          options={themeOptions}
-          isClearable={false}
-          isSearchable={false}
-          styles={selectStyles(isDarkMode)}
-        />
-      </div>
-      <div className={styles.language_select_wrapper}>
-        <label htmlFor="language">{t("selectLanguage")}</label>
-        <Select<Option, false>
-          inputId="language"
-          className={`${styles.language_select} ${styles.select}`}
-          value={selectedOption}
-          onChange={changeLanguage}
-          options={languages}
-          isClearable={false}
-          isSearchable={false}
-          styles={selectStyles(isDarkMode)}
-        />
-      </div>
-      <Button className={styles.logout_btn} onClick={onLogout}>
-        {t("logout")} <Icon.BoxArrowRight />
-      </Button>
     </div>
   );
 };

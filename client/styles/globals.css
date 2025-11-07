@@ -16,6 +16,7 @@
   --but-bghover-color: #13aff0;
   --but-borderho-color: #13aff0;
   --tab-bg-color: #fff;
+  --border-color: rgb(175, 169, 169);
 }
 
 :root[data-bs-theme="dark"] {
@@ -28,6 +29,7 @@
   --toolbar-bg-color: #2c2c2c;
   --modal-bg-color: #2c2c2c;
   --tab-bg-color: #2c2c2c;
+  --border-color: #e7e5e5;
 }
 
 html,

@@ -146,3 +146,18 @@
   letter-spacing: 0.5px;
   margin-bottom: 0;
 }
+
+@media (max-width: 820px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .form_row {
+    flex: unset;
+  }
+
+  .description_preview {
+    height: unset;
+    max-height: 375px;
+  }
+}
