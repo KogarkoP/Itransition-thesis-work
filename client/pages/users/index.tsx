@@ -17,11 +17,11 @@ import { Option } from "@/types/selectOption";
 import { useTranslation } from "react-i18next";
 import Select, { SingleValue } from "react-select";
 import { selectStyles } from "@/styles/selectStyle";
-import { useTheme } from "@/context/themeContext";
+import { useApp } from "@/context/AppContext";
 
 const UsersPage = () => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useApp();
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [usersIds, setUsersIds] = useState<string[]>([]);

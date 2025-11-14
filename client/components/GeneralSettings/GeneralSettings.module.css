@@ -12,12 +12,7 @@
   height: 460px;
 }
 
-.settings_wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
+.settings_wrapper,
 .description_preview_wrapper {
   display: flex;
   flex-direction: column;
@@ -49,47 +44,19 @@
   outline: none;
 }
 
-.form_row .title_input:hover,
-.form_row .description_input:hover {
+.form_row .title_input:hover {
   border-color: #b3b3b3;
 }
 
-.form_row .title_input:focus,
-.form_row .description_input:focus {
+.form_row .title_input:focus {
   border-color: #2684ff;
   box-shadow: 0 0 0 1px #2684ff;
 }
 
-.form_row .description_input {
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 1px;
-  background-color: var(--input-bg-color);
-  border-color: var(--input-border-color);
-  padding: 10px;
-  resize: none;
-  outline: none;
-  transition: all 0.1s;
-  height: 250px;
-}
-
-.description_preview {
-  word-break: break-word;
-  padding: 0 10px;
-  list-style: none;
-  height: 378px;
-  overflow: auto;
-}
-
-.form_row label,
-.description_preview_heading {
+.form_row label {
   font-size: 17px;
   font-weight: 500;
   letter-spacing: 0.5px;
-}
-
-.description_preview_heading {
-  margin-bottom: 0;
 }
 
 .form_row .required {
@@ -100,21 +67,6 @@
 
 .form_wrapper button {
   margin-top: 1rem;
-}
-
-.close_btn {
-  text-align: right;
-  margin-bottom: -10px;
-}
-
-.close_btn svg {
-  font-size: 35px;
-  transition: rotate 2s ease-in-out;
-  cursor: pointer;
-}
-
-.close_btn svg:hover {
-  rotate: 720deg;
 }
 
 .add_btn {
@@ -156,8 +108,7 @@
     flex: unset;
   }
 
-  .description_preview {
+  .description_preview_wrapper {
     height: unset;
-    max-height: 378px;
   }
 }

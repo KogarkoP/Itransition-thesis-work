@@ -13,19 +13,19 @@ import "react-tabs/style/react-tabs.css";
 import { Table, Button } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import ItemRow from "@/components/ItemRow/ItemRow";
-import { useTheme } from "@/context/themeContext";
+import { useApp } from "@/context/AppContext";
 import Select, { SingleValue } from "react-select";
 import { Option } from "@/types/selectOption";
 import { selectStyles } from "@/styles/selectStyle";
 import { deleteItemsByIds, getAllItems } from "../api/itemsFetch";
 import { Item } from "@/types/item";
 import ItemForm from "@/components/ItemForm/ItemForm";
-import GeneralSettings from "@/components/GeneralSettings";
+import GeneralSettings from "@/components/GeneralSettings/GeneralSettings";
 import { Alert } from "@mui/material";
 
 const InventoryPage = () => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode, isLoggedIn } = useTheme();
+  const { isDarkMode, isLoggedIn } = useApp();
   const router = useRouter();
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [isCreated, setCreated] = useState<boolean>(false);

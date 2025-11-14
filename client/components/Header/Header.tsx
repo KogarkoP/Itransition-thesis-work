@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import UserMenu from "../UseMenu/UserMenu";
 import { getUserById } from "@/pages/api/userFetch";
 import { Option, Object } from "@/types/selectOption";
-import { useTheme } from "@/context/themeContext";
+import { useApp } from "@/context/AppContext";
 import NavSideBar from "../NavSideBar/NavSideBar";
 
 type HeaderProps = {
@@ -19,7 +19,7 @@ type HeaderProps = {
 
 const Header = ({ width, isNavSideBar, toggleNavSideBar }: HeaderProps) => {
   const { t, i18n } = useTranslation();
-  const { setDarkMode, isLoggedIn, setLoggedIn } = useTheme();
+  const { setDarkMode, isLoggedIn, setLoggedIn } = useApp();
   const [isMounted, setMounted] = useState(false);
   const [user, setUser] = useState<{ [key: string]: string }>({});
   const [userMenu, setUserMenu] = useState(false);

@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
 import styles from "./GeneralSettings.module.css";
+import { useEffect, useState } from "react";
 import { Inventory } from "@/types/inventory";
 import { useTranslation } from "react-i18next";
 import { selectStyles } from "@/styles/selectStyle";
 import Select, { SingleValue } from "react-select";
-import { marked } from "marked";
 import { Option } from "@/types/selectOption";
-import DOMPurify from "dompurify";
-import parse from "html-react-parser";
+import { useApp } from "@/context/AppContext";
+import { updateInventorySettingsByID } from "@/pages/api/inventoryFetch";
+import DescriptionInput from "../DescriptionInput/DescriptionInput";
+import DescriptionPreview from "../DescriptionPreview/DescriptionPreview";
 import * as Icon from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
-import { useTheme } from "@/context/themeContext";
-import { updateInventorySettingsByID } from "@/pages/api/inventoryFetch";
 
 type GeneralSettingsProps = {
   inventory: Inventory;
@@ -27,14 +26,11 @@ const GeneralSettings = ({
   fetchInventory,
 }: GeneralSettingsProps) => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode, isLoggedIn } = useTheme();
+  const { isDarkMode, isLoggedIn } = useApp();
   const [title, setTitle] = useState(inventory.title);
   const [description, setDescription] = useState(inventory.description);
   const [category, setCategory] = useState<Option | null>();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const rawHtml = marked(description || `_${t("nothingToPreview")}_`) as string;
-  const cleanHtml = DOMPurify.sanitize(rawHtml);
-  const descriptionPreview = parse(cleanHtml);
 
   const categories = [
     { value: "appliances", label: t("appliances") },
@@ -167,24 +163,13 @@ const GeneralSettings = ({
             <p className={styles.field_error}>{errors.category}</p>
           )}
         </div>
-        <div className={styles.form_row}>
-          <label htmlFor="description">{t("description")}</label>
-          <textarea
-            className={styles.description_input}
-            id="description"
-            placeholder={t("descriptionPlaceholder")}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
+        <DescriptionInput
+          description={description}
+          setDescription={setDescription}
+        />
       </div>
       <div className={styles.description_preview_wrapper}>
-        <div className={styles.form_row}>
-          <h4 className={styles.description_preview_heading}>{t("preview")}</h4>
-          <div id="description_preview" className={styles.description_preview}>
-            {descriptionPreview}
-          </div>
-        </div>
+        <DescriptionPreview description={description} />
         <Button
           disabled={!isLoggedIn}
           className={styles.add_btn}

@@ -1,6 +1,6 @@
 import styles from "./UserMenu.module.css";
 import Select, { SingleValue } from "react-select";
-import { useTheme } from "@/context/themeContext";
+import { useApp } from "@/context/AppContext";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -39,7 +39,7 @@ const UserMenu = ({
   toggleUserMenu,
 }: UserMenuProps) => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode, setDarkMode, setLoggedIn } = useTheme();
+  const { isDarkMode, setDarkMode, setLoggedIn } = useApp();
   const router = useRouter();
 
   const onLogout = () => {

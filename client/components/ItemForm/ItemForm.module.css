@@ -66,15 +66,10 @@
   overflow: auto;
 }
 
-.form_row label,
-.description_preview_heading {
+.form_row label {
   font-size: 17px;
   font-weight: 500;
   letter-spacing: 0.5px;
-}
-
-.description_preview_heading {
-  margin-bottom: 0;
 }
 
 .form_row .required {

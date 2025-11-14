@@ -3,13 +3,12 @@ import { useState } from "react";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
-import parse from "html-react-parser";
 import * as Icon from "react-bootstrap-icons";
 import { insertItem } from "@/pages/api/itemsFetch";
 import { updateInventoryById } from "@/pages/api/inventoryFetch";
 import { Inventory } from "@/types/inventory";
+import DescriptionInput from "@/components/DescriptionInput/DescriptionInput";
+import DescriptionPreview from "../DescriptionPreview/DescriptionPreview";
 
 type ItemFormProps = {
   inventoryId: string;
@@ -35,9 +34,6 @@ const InventoryForm = ({
   const [price, setPrice] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const rawHtml = marked(description || `_${t("nothingToPreview")}_`) as string;
-  const cleanHtml = DOMPurify.sanitize(rawHtml);
-  const descriptionPreview = parse(cleanHtml);
 
   const onSubmit = async () => {
     try {
@@ -152,22 +148,15 @@ const InventoryForm = ({
           />
           {errors.price && <p className={styles.field_error}>{errors.price}</p>}
         </div>
-        <div className={styles.form_row}>
-          <label htmlFor="description">{t("description")}</label>
-          <textarea
-            className={styles.description_input}
-            id="description"
-            placeholder={t("descriptionPlaceholder")}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div className={styles.form_row}>
-          <h4 className={styles.description_preview_heading}>{t("preview")}</h4>
-          <div id="description_preview" className={styles.description_preview}>
-            {descriptionPreview}
-          </div>
-        </div>
+        <DescriptionInput
+          description={description}
+          setDescription={setDescription}
+          desFormStyles={"form_description_input"}
+        />
+        <DescriptionPreview
+          description={description}
+          desFormStyles={"form_description_preview"}
+        />
         <Button className={styles.add_btn} onClick={onSubmit}>
           {t("add")}
         </Button>

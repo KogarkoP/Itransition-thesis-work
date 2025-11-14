@@ -1,6 +1,6 @@
 import styles from "./NavSideBar.module.css";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@/context/themeContext";
+import { useApp } from "@/context/AppContext";
 import * as Icon from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
@@ -11,7 +11,7 @@ type NavSideBarProps = {
 };
 
 const NavSideBar = ({ width, toggleNavSideBar }: NavSideBarProps) => {
-  const { isLoggedIn } = useTheme();
+  const { isLoggedIn } = useApp();
   const { t } = useTranslation();
   const [isError, setError] = useState(false);
 

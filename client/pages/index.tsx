@@ -9,14 +9,14 @@ import * as Icon from "react-bootstrap-icons";
 import Select, { SingleValue } from "react-select";
 import { selectStyles } from "@/styles/selectStyle";
 import InventoryForm from "@/components/InventoryForm/InventoryForm";
-import { useTheme } from "@/context/themeContext";
+import { useApp } from "@/context/AppContext";
 import { Inventory } from "@/types/inventory";
 import { deleteInventoriesByIds } from "./api/inventoryFetch";
 import { Option } from "@/types/selectOption";
 
 const MainPage = () => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode, isLoggedIn } = useTheme();
+  const { isDarkMode, isLoggedIn } = useApp();
   const [inventories, setInventories] = useState<Inventory[] | []>([]);
   const [inventoryForm, setInventoryForm] = useState(false);
   const [isCreated, setCreated] = useState<boolean>(false);

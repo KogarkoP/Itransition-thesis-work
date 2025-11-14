@@ -6,12 +6,11 @@ import { useTranslation } from "react-i18next";
 import { Option } from "@/types/selectOption";
 import Select, { SingleValue } from "react-select";
 import { Button } from "react-bootstrap";
-import { useTheme } from "@/context/themeContext";
+import { useApp } from "@/context/AppContext";
 import { selectStyles } from "@/styles/selectStyle";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
-import parse from "html-react-parser";
 import * as Icon from "react-bootstrap-icons";
+import DescriptionInput from "../DescriptionInput/DescriptionInput";
+import DescriptionPreview from "../DescriptionPreview/DescriptionPreview";
 
 type InventoryFormProps = {
   isCreated: boolean;
@@ -27,14 +26,11 @@ const InventoryForm = ({
   fetchInventories,
 }: InventoryFormProps) => {
   const { t } = useTranslation();
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useApp();
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<Option | null>(null);
   const [description, setDescription] = useState<string>("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const rawHtml = marked(description || `_${t("nothingToPreview")}_`) as string;
-  const cleanHtml = DOMPurify.sanitize(rawHtml);
-  const descriptionPreview = parse(cleanHtml);
 
   const categories = [
     { value: "appliances", label: t("appliances") },
@@ -147,22 +143,15 @@ const InventoryForm = ({
             <p className={styles.field_error}>{errors.category}</p>
           )}
         </div>
-        <div className={styles.form_row}>
-          <label htmlFor="description">{t("description")}</label>
-          <textarea
-            className={styles.description_input}
-            id="description"
-            placeholder={t("descriptionPlaceholder")}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div className={styles.form_row}>
-          <h4 className={styles.description_preview_heading}>{t("preview")}</h4>
-          <div id="description_preview" className={styles.description_preview}>
-            {descriptionPreview}
-          </div>
-        </div>
+        <DescriptionInput
+          description={description}
+          setDescription={setDescription}
+          desFormStyles={"form_description_input"}
+        />
+        <DescriptionPreview
+          description={description}
+          desFormStyles={"form_description_preview"}
+        />
         <Button className={styles.add_btn} onClick={onSubmit}>
           {t("add")}
         </Button>

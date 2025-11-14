@@ -31,28 +31,13 @@
   outline: none;
 }
 
-.form_row .title_input:hover,
-.form_row .description_input:hover {
+.form_row .title_input:hover {
   border-color: #b3b3b3;
 }
 
-.form_row .title_input:focus,
-.form_row .description_input:focus {
+.form_row .title_input:focus {
   border-color: #2684ff;
   box-shadow: 0 0 0 1px #2684ff;
-}
-
-.form_row .description_input {
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 1px;
-  background-color: var(--input-bg-color);
-  border-color: var(--input-border-color);
-  padding: 10px;
-  resize: none;
-  outline: none;
-  transition: all 0.1s;
-  height: 150px;
 }
 
 .description_preview {
@@ -63,15 +48,10 @@
   overflow: auto;
 }
 
-.form_row label,
-.description_preview_heading {
+.form_row label {
   font-size: 17px;
   font-weight: 500;
   letter-spacing: 0.5px;
-}
-
-.description_preview_heading {
-  margin-bottom: 0;
 }
 
 .form_row .required {

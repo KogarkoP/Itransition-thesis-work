@@ -4,20 +4,23 @@ import {
   useState,
   ReactNode,
   useEffect,
+  PropsWithChildren,
 } from "react";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 
-interface ThemeContextType {
+interface AppContextType {
   isDarkMode: boolean;
   setDarkMode: (value: boolean) => void;
   isLoggedIn: boolean;
   setLoggedIn: (value: boolean) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+type AppProviderProps = PropsWithChildren;
+
+export const AppProvider = ({ children }: AppProviderProps) => {
   const [isDarkMode, setDarkMode] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const { i18n } = useTranslation();
@@ -37,16 +40,16 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ThemeContext.Provider
+    <AppContext.Provider
       value={{ isDarkMode, setDarkMode, isLoggedIn, setLoggedIn }}
     >
       {children}
-    </ThemeContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
+export const useApp = () => {
+  const context = useContext(AppContext);
   if (!context) throw new Error("useTheme must be used within ThemeProvider");
   return context;
 };
