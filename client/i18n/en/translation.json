@@ -103,5 +103,6 @@
   "priceMustBeNumber": "Price must be a number",
   "save": "Save",
   "changesSaved": "Changes saved",
-  "loginRequired": "You have to be logged in to manage settings"
+  "loginRequired": "You have to be logged in to manage settings",
+  "creator": "Creator"
 }

@@ -18,11 +18,11 @@ import { useTranslation } from "react-i18next";
 import Select, { SingleValue } from "react-select";
 import { selectStyles } from "@/styles/selectStyle";
 import { useApp } from "@/context/AppContext";
+import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 
 const UsersPage = () => {
   const { t, i18n } = useTranslation();
   const { isDarkMode } = useApp();
-  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [usersIds, setUsersIds] = useState<string[]>([]);
   const [filter, setFilter] = useState<Option>({
@@ -61,24 +61,27 @@ const UsersPage = () => {
   };
 
   const filteredUsers = users
-    .filter((user) => {
-      if (filter.value === "blocked") return user.isBlocked;
-      if (filter.value === "unverified")
-        return !user.isVerified && !user.isBlocked;
-      if (filter.value === "active") return !user.isBlocked && user.isVerified;
-      return true;
-    })
-    .sort((a, b) => {
-      if (filter.value === "newest")
-        return (
-          new Date(b.lastLogin).getTime() - new Date(a.lastLogin).getTime()
-        );
-      if (filter.value === "oldest")
-        return (
-          new Date(a.lastLogin).getTime() - new Date(b.lastLogin).getTime()
-        );
-      return 0;
-    });
+    ? users
+        .filter((user) => {
+          if (filter.value === "blocked") return user.isBlocked;
+          if (filter.value === "unverified")
+            return !user.isVerified && !user.isBlocked;
+          if (filter.value === "active")
+            return !user.isBlocked && user.isVerified;
+          return true;
+        })
+        .sort((a, b) => {
+          if (filter.value === "newest")
+            return (
+              new Date(b.lastLogin).getTime() - new Date(a.lastLogin).getTime()
+            );
+          if (filter.value === "oldest")
+            return (
+              new Date(a.lastLogin).getTime() - new Date(b.lastLogin).getTime()
+            );
+          return 0;
+        })
+    : [];
 
   const toggleCheckboxes = () => {
     if (!users) return;
@@ -152,19 +155,8 @@ const UsersPage = () => {
   }, []);
 
   useEffect(() => {
-    const token = Cookies.get("@user_jwt");
-    if (!token) {
-      router.replace("/");
-    } else {
-      setLoading(false);
-    }
-  }, [router]);
-
-  useEffect(() => {
-    if (!loading) {
-      fetchUsers();
-    }
-  }, [loading]);
+    fetchUsers();
+  }, []);
 
   useEffect(() => {
     setUsersIds([]);
@@ -177,117 +169,117 @@ const UsersPage = () => {
     }));
   }, [i18n.language, t]);
 
-  if (loading) return null;
-
   return (
     <PageTemplate>
-      <div className={styles.main}>
-        <h1>{t("users")}</h1>
-        <div className={styles.toolbar}>
-          <ul className={styles.buttons_wrapper}>
-            <li>
-              <Button
-                className={styles.block_btn}
-                disabled={usersIds.length === 0}
-                onClick={() => {
-                  updateUsers(usersIds, true);
-                }}
-              >
-                <Icon.LockFill />
-                {t("block")}
-              </Button>
-            </li>
-            <li>
-              <Button
-                className={styles.unblock_btn}
-                disabled={usersIds.length === 0}
-                onClick={() => {
-                  updateUsers(usersIds, false);
-                }}
-              >
-                <Icon.UnlockFill />
-              </Button>
-            </li>
-            <li>
-              <Button
-                className="btn btn-danger"
-                disabled={usersIds.length === 0}
-                onClick={() => {
-                  deleteUsers(usersIds);
-                }}
-              >
-                <Icon.Trash3Fill />
-              </Button>
-            </li>
-          </ul>
-          <ul className={styles.filter_wrapper}>
-            <li>
-              <Select
-                inputId="filter"
-                className={styles.filter_select}
-                value={filter}
-                onChange={changeFilter}
-                options={filterOptions}
-                isClearable={false}
-                styles={selectStyles(isDarkMode)}
-              />
-            </li>
-          </ul>
-        </div>
-        {filteredUsers && filteredUsers.length > 0 ? (
-          <Table responsive className={styles.users_table}>
-            <thead>
-              <tr className={styles.table_heading}>
-                <th className={styles.checkbox_con}>
-                  <input
-                    type="checkbox"
-                    id="select_all"
-                    checked={
-                      filteredUsers.length > 0 &&
-                      filteredUsers.every((u) => usersIds.includes(u.id))
-                    }
-                    onChange={() => {
-                      toggleCheckboxes();
-                    }}
-                  />
-                </th>
-                <th>{t("name")}</th>
-                <th>{t("email")}</th>
-                <th>{t("role")}</th>
-                <th>{t("status")}</th>
-                <th>{t("lastSeen")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.map((user) => {
-                return (
-                  <UserRow
-                    key={user.id}
-                    id={user.id}
-                    name={user.name}
-                    email={user.email}
-                    role={user.role}
-                    verified={user.isVerified}
-                    blocked={user.isBlocked}
-                    lastLogin={user.lastLogin}
-                    setUsersIds={selectedUsersIds}
-                    usersIds={usersIds}
-                    loggedInUserId={loggedInUserId}
-                  />
-                );
-              })}
-            </tbody>
-          </Table>
-        ) : (
-          <div className={styles.notification_wrapper}>
-            <div className={styles.nothing_found_con}>
-              <Icon.Search className={styles.search_icon} />
-              <Icon.Question className={styles.question_icon} />
-            </div>
-            <p>{t("noUsersFound")}</p>
+      <ProtectedRoute allowedRoles={["admin", "creator"]}>
+        <div className={styles.main}>
+          <h1>{t("users")}</h1>
+          <div className={styles.toolbar}>
+            <ul className={styles.buttons_wrapper}>
+              <li>
+                <Button
+                  className={styles.block_btn}
+                  disabled={usersIds.length === 0}
+                  onClick={() => {
+                    updateUsers(usersIds, true);
+                  }}
+                >
+                  <Icon.LockFill />
+                  {t("block")}
+                </Button>
+              </li>
+              <li>
+                <Button
+                  className={styles.unblock_btn}
+                  disabled={usersIds.length === 0}
+                  onClick={() => {
+                    updateUsers(usersIds, false);
+                  }}
+                >
+                  <Icon.UnlockFill />
+                </Button>
+              </li>
+              <li>
+                <Button
+                  className="btn btn-danger"
+                  disabled={usersIds.length === 0}
+                  onClick={() => {
+                    deleteUsers(usersIds);
+                  }}
+                >
+                  <Icon.Trash3Fill />
+                </Button>
+              </li>
+            </ul>
+            <ul className={styles.filter_wrapper}>
+              <li>
+                <Select
+                  inputId="filter"
+                  className={styles.filter_select}
+                  value={filter}
+                  onChange={changeFilter}
+                  options={filterOptions}
+                  isClearable={false}
+                  styles={selectStyles(isDarkMode)}
+                />
+              </li>
+            </ul>
           </div>
-        )}
-      </div>
+          {filteredUsers && filteredUsers.length > 0 ? (
+            <Table responsive className={styles.users_table}>
+              <thead>
+                <tr className={styles.table_heading}>
+                  <th className={styles.checkbox_con}>
+                    <input
+                      type="checkbox"
+                      id="select_all"
+                      checked={
+                        filteredUsers.length > 0 &&
+                        filteredUsers.every((u) => usersIds.includes(u.id))
+                      }
+                      onChange={() => {
+                        toggleCheckboxes();
+                      }}
+                    />
+                  </th>
+                  <th>{t("name")}</th>
+                  <th>{t("email")}</th>
+                  <th>{t("role")}</th>
+                  <th>{t("status")}</th>
+                  <th>{t("lastSeen")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers.map((user) => {
+                  return (
+                    <UserRow
+                      key={user.id}
+                      id={user.id}
+                      name={user.name}
+                      email={user.email}
+                      role={user.role}
+                      verified={user.isVerified}
+                      blocked={user.isBlocked}
+                      lastLogin={user.lastLogin}
+                      setUsersIds={selectedUsersIds}
+                      usersIds={usersIds}
+                      loggedInUserId={loggedInUserId}
+                    />
+                  );
+                })}
+              </tbody>
+            </Table>
+          ) : (
+            <div className={styles.notification_wrapper}>
+              <div className={styles.nothing_found_con}>
+                <Icon.Search className={styles.search_icon} />
+                <Icon.Question className={styles.question_icon} />
+              </div>
+              <p>{t("noUsersFound")}</p>
+            </div>
+          )}
+        </div>
+      </ProtectedRoute>
     </PageTemplate>
   );
 };

@@ -103,5 +103,6 @@
   "priceMustBeNumber": "Kaina turi būti skaičius",
   "save": "Išsaugoti",
   "changesSaved": "Pakeitimai išsaugoti",
-  "loginRequired": "Norint tvarkyti nustatymus, turite prisijungti"
+  "loginRequired": "Norint tvarkyti nustatymus, turite prisijungti",
+  "creator": "Kūrėjas"
 }

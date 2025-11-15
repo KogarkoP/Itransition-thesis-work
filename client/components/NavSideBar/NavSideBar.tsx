@@ -2,7 +2,7 @@ import styles from "./NavSideBar.module.css";
 import { useTranslation } from "react-i18next";
 import { useApp } from "@/context/AppContext";
 import * as Icon from "react-bootstrap-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
 
 type NavSideBarProps = {
@@ -22,14 +22,6 @@ const NavSideBar = ({ width, toggleNavSideBar }: NavSideBarProps) => {
 
   return (
     <>
-      {isError && (
-        <ModalTemplate>
-          <div className={styles.message}>
-            <Icon.XCircle />
-            <p>{t("adminError")}</p>
-          </div>
-        </ModalTemplate>
-      )}
       <div
         onClick={() => toggleNavSideBar()}
         className={styles.nav_side_bar_wrapper}
@@ -50,15 +42,9 @@ const NavSideBar = ({ width, toggleNavSideBar }: NavSideBarProps) => {
             </a>
           </div>
           <ul className={styles.nav_wrapper}>
-            {isLoggedIn ? (
-              <a href="/users">
-                <li>{t("users")}</li>
-              </a>
-            ) : (
-              <li className={styles.not_allowed} onClick={displayError}>
-                {t("users")}
-              </li>
-            )}
+            <a href="/users">
+              <li>{t("users")}</li>
+            </a>
             <a href="/">
               <li>{t("inventories")}</li>
             </a>

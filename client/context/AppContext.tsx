@@ -2,18 +2,20 @@ import {
   createContext,
   useContext,
   useState,
-  ReactNode,
   useEffect,
   PropsWithChildren,
 } from "react";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
+import { User } from "@/types/user";
+import { getUserById } from "@/pages/api/userFetch";
 
 interface AppContextType {
   isDarkMode: boolean;
   setDarkMode: (value: boolean) => void;
   isLoggedIn: boolean;
   setLoggedIn: (value: boolean) => void;
+  currentUser: User | null | undefined;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -23,6 +25,7 @@ type AppProviderProps = PropsWithChildren;
 export const AppProvider = ({ children }: AppProviderProps) => {
   const [isDarkMode, setDarkMode] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null | undefined>();
   const { i18n } = useTranslation();
 
   useEffect(() => {
@@ -33,15 +36,32 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       document.documentElement.setAttribute("data-bs-theme", "light");
       setDarkMode(false);
       i18n.changeLanguage("en");
+      setCurrentUser(null);
       return;
     }
 
+    if (token) {
+      const fetchCurrentUser = async () => {
+        try {
+          const userId = localStorage.getItem("userId") || "";
+          if (!userId) return;
+          const response = await getUserById(userId);
+          if (response) {
+            setCurrentUser(response.data.user);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      fetchCurrentUser();
+    }
     setLoggedIn(true);
   }, []);
 
   return (
     <AppContext.Provider
-      value={{ isDarkMode, setDarkMode, isLoggedIn, setLoggedIn }}
+      value={{ isDarkMode, setDarkMode, isLoggedIn, setLoggedIn, currentUser }}
     >
       {children}
     </AppContext.Provider>
