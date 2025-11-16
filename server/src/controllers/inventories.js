@@ -38,6 +38,29 @@ export const GET_INVENTORY_BY_ID = async (req, res) => {
   }
 };
 
+export const GET_USER_INVENTORIES = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const inventories = await inventoryModel.find({ createdBy: id });
+
+    if (inventories.length === 0) {
+      return res.status(404).json({
+        message: "No inventories found for provided User",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Here are your inventories",
+      inventories: inventories,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
 export const INSERT_INVENTORY = async (req, res) => {
   try {
     const inventory = {

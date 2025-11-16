@@ -45,8 +45,6 @@ const ProfilePage = () => {
   });
 
   const toggleCheckboxes = () => {
-    if (!inventories) return;
-
     setInventoriesIds((prevIds) => {
       const allIds = filteredInventories.map((inventory) => inventory.id);
       const allSelected = allIds.every((id) => prevIds.includes(id));
@@ -67,6 +65,9 @@ const ProfilePage = () => {
     if (!currentUser) return;
     const response = await getUserInventories(currentUser.id);
     setInventories(response.data.inventories);
+    if (response) {
+      console.log(response);
+    }
   };
 
   const selectedInventoriesIds = (inventoryId: string) => {
@@ -97,7 +98,7 @@ const ProfilePage = () => {
       router.push("login");
       return;
     }
-    // fetchInventories();
+    fetchInventories();
     setLoading(false);
   }, []);
 

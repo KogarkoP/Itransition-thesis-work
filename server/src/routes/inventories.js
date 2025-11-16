@@ -2,6 +2,7 @@ import express from "express";
 import {
   GET_ALL_INVENTORIES,
   GET_INVENTORY_BY_ID,
+  GET_USER_INVENTORIES,
   INSERT_INVENTORY,
   DELETE_INVENTORIES_BY_IDS,
   UPDATE_INVENTORY_BY_ID,
@@ -17,6 +18,7 @@ const router = express.Router();
 router.post("/", validate(inventorySchema), auth, INSERT_INVENTORY);
 router.get("/", GET_ALL_INVENTORIES);
 router.get("/:id", GET_INVENTORY_BY_ID);
+router.get("user-inventories/:id", auth, GET_USER_INVENTORIES);
 router.put("/:id", auth, UPDATE_INVENTORY_BY_ID);
 router.put(
   "/settings/:id",
