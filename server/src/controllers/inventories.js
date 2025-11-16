@@ -43,12 +43,6 @@ export const GET_USER_INVENTORIES = async (req, res) => {
     const id = req.params.id;
     const inventories = await inventoryModel.find({ createdBy: id });
 
-    if (inventories.length === 0) {
-      return res.status(404).json({
-        message: "No inventories found for provided User",
-      });
-    }
-
     return res.status(200).json({
       message: "Here are your inventories",
       inventories: inventories,

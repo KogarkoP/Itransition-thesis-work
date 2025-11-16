@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import styles from "./InventoryRow.module.css";
 import Link from "next/link";
+import { useApp } from "@/context/AppContext";
 
 type InventoryRowProps = {
   id: string;
@@ -22,6 +23,7 @@ const InventoryRow = ({
   setInventoriesIds,
 }: InventoryRowProps) => {
   const { t } = useTranslation();
+  const { isLoggedIn } = useApp();
   const creationTime = new Date(createdAt).toLocaleDateString(undefined, {
     year: "numeric",
     month: "2-digit",
@@ -41,6 +43,7 @@ const InventoryRow = ({
       <td className={styles.checkbox_con}>
         <input
           type="checkbox"
+          disabled={!isLoggedIn}
           id={id}
           checked={inventoriesIds.includes(id)}
           onChange={() => setInventoriesIds(id)}

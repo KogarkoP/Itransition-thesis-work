@@ -193,6 +193,7 @@ const InventoryPage = () => {
                     <th className={styles.checkbox_con}>
                       <input
                         type="checkbox"
+                        disabled={!isLoggedIn}
                         id="select_all"
                         checked={
                           filteredItems.length > 0 &&

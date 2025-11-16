@@ -12,9 +12,11 @@ import { Inventory } from "@/types/inventory";
 import { deleteInventoriesByIds } from "./api/inventoryFetch";
 import { Option } from "@/types/selectOption";
 import Toolbar from "@/components/Toolbar/Toolbar";
+import { useApp } from "@/context/AppContext";
 
 const MainPage = () => {
   const { t, i18n } = useTranslation();
+  const { isLoggedIn } = useApp();
   const [inventories, setInventories] = useState<Inventory[] | []>([]);
   const [inventoryForm, setInventoryForm] = useState<boolean>(false);
   const [isCreated, setCreated] = useState<boolean>(false);
@@ -120,6 +122,7 @@ const MainPage = () => {
                   <input
                     type="checkbox"
                     id="select_all"
+                    disabled={!isLoggedIn}
                     checked={
                       filteredInventories.length > 0 &&
                       filteredInventories.every((i) =>

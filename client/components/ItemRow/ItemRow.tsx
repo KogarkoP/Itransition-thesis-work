@@ -1,3 +1,4 @@
+import { useApp } from "@/context/AppContext";
 import styles from "./ItemRow.module.css";
 import Link from "next/link";
 
@@ -20,6 +21,7 @@ const ItemRow = ({
   itemsIds,
   setItemsIds,
 }: ItemRowProps) => {
+  const { isLoggedIn } = useApp();
   const creationTime = new Date(createdAt).toLocaleDateString(undefined, {
     year: "numeric",
     month: "2-digit",
@@ -39,6 +41,7 @@ const ItemRow = ({
       <td className={styles.checkbox_con}>
         <input
           type="checkbox"
+          disabled={!isLoggedIn}
           id={id}
           checked={itemsIds.includes(id)}
           onChange={() => setItemsIds(id)}

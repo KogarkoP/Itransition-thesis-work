@@ -36,6 +36,12 @@
   border-color: #007bff;
 }
 
+.checkbox_con input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  accent-color: #ccc;
+  opacity: 0.6;
+}
+
 .checkbox_con input[type="checkbox"]:checked::after {
   content: "✔";
   font-weight: 700;

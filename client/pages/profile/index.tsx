@@ -98,9 +98,12 @@ const ProfilePage = () => {
       router.push("login");
       return;
     }
-    fetchInventories();
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    fetchInventories();
+  }, [currentUser]);
 
   useEffect(() => {
     setFilter((prev) => ({
