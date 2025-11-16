@@ -43,8 +43,6 @@ const MainPage = () => {
   });
 
   const toggleCheckboxes = () => {
-    if (!inventories) return;
-
     setInventoriesIds((prevIds) => {
       const allIds = filteredInventories.map((inventory) => inventory.id);
       const allSelected = allIds.every((id) => prevIds.includes(id));
