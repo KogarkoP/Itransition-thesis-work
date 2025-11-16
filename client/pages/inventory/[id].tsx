@@ -10,18 +10,18 @@ import parse from "html-react-parser";
 import { useTranslation } from "react-i18next";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import * as Icon from "react-bootstrap-icons";
 import ItemRow from "@/components/ItemRow/ItemRow";
 import { useApp } from "@/context/AppContext";
-import Select, { SingleValue } from "react-select";
+import { SingleValue } from "react-select";
 import { Option } from "@/types/selectOption";
-import { selectStyles } from "@/styles/selectStyle";
 import { deleteItemsByIds, getAllItems } from "../api/itemsFetch";
 import { Item } from "@/types/item";
 import ItemForm from "@/components/ItemForm/ItemForm";
 import GeneralSettings from "@/components/GeneralSettings/GeneralSettings";
 import { Alert } from "@mui/material";
+import Toolbar from "@/components/Toolbar/Toolbar";
 
 const InventoryPage = () => {
   const { t, i18n } = useTranslation();
@@ -32,7 +32,7 @@ const InventoryPage = () => {
   const [items, setItems] = useState<Item[] | []>([]);
   const [itemsIds, setItemsIds] = useState<string[]>([]);
   const [description, setDescription] = useState<ReactNode>(null);
-  const [itemForm, setItemForm] = useState(false);
+  const [itemForm, setItemForm] = useState<boolean>(false);
   const [filter, setFilter] = useState<Option>({
     value: "all",
     label: t("all"),
@@ -178,41 +178,14 @@ const InventoryPage = () => {
               />
             )}
             <h2>{t("items")}</h2>
-            <div className={styles.toolbar}>
-              <ul className={styles.buttons_wrapper}>
-                <li>
-                  <Button
-                    disabled={!isLoggedIn}
-                    className={styles.insert_btn}
-                    onClick={toggleItemForm}
-                  >
-                    {t("add")}
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    className="btn btn-danger"
-                    disabled={!isLoggedIn || itemsIds.length <= 0}
-                    onClick={() => deleteItems(itemsIds)}
-                  >
-                    <Icon.Trash3Fill />
-                  </Button>
-                </li>
-              </ul>
-              <ul className={styles.filter_wrapper}>
-                <li>
-                  <Select
-                    className={styles.inventory_filter}
-                    inputId="item_filter"
-                    instanceId="item_filter"
-                    value={filter}
-                    onChange={changeFilter}
-                    options={filterOptions}
-                    styles={selectStyles(isDarkMode)}
-                  />
-                </li>
-              </ul>
-            </div>
+            <Toolbar
+              ids={itemsIds}
+              filter={filter}
+              filterOptions={filterOptions}
+              changeFilter={changeFilter}
+              deleteSomething={deleteItems}
+              toggleForm={toggleItemForm}
+            />
             {filteredItems && filteredItems.length > 0 ? (
               <Table responsive className={styles.inventories_table}>
                 <thead>

@@ -22,7 +22,7 @@ import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 
 const UsersPage = () => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode } = useApp();
+  const { isDarkMode, currentUser } = useApp();
   const [users, setUsers] = useState<User[]>([]);
   const [usersIds, setUsersIds] = useState<string[]>([]);
   const [filter, setFilter] = useState<Option>({
@@ -150,9 +150,10 @@ const UsersPage = () => {
   };
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId") || "";
-    setLoggedInUserId(userId);
-  }, []);
+    if (currentUser) {
+      setLoggedInUserId(currentUser.id);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     fetchUsers();

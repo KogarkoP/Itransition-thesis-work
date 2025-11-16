@@ -9,6 +9,16 @@ export const getAllInventories = async () => {
   return response;
 };
 
+export const getUserInventories = async (id: string) => {
+  const jwt = Cookies.get("@user_jwt");
+  const response = await axios.get(
+    `${BASE_URL}/inventories/user-inventories/${id}`,
+    { headers: { Authorization: jwt } }
+  );
+
+  return response;
+};
+
 export const insertInventory = async (inventory: InsertInventory) => {
   const jwt = Cookies.get("@user_jwt");
   const response = await axios.post(`${BASE_URL}/inventories`, inventory, {

@@ -42,11 +42,14 @@ const NavSideBar = ({ width, toggleNavSideBar }: NavSideBarProps) => {
             </a>
           </div>
           <ul className={styles.nav_wrapper}>
-            <a href="/users">
-              <li>{t("users")}</li>
-            </a>
             <a href="/">
               <li>{t("inventories")}</li>
+            </a>
+            <a href="/profile">
+              <li>{t("profile")}</li>
+            </a>
+            <a href="/users">
+              <li>{t("users")}</li>
             </a>
           </ul>
         </div>

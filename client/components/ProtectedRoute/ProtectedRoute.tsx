@@ -27,7 +27,7 @@ const ProtectedRoute = ({ allowedRoles, children }: ProtectedRouteProps) => {
       <div className={styles.page_wrapper}>
         <Alert severity="error">{`You have to have ${allowedRoles.join(
           ", "
-        )} rights`}</Alert>
+        )} rights to view this content`}</Alert>
       </div>
     );
   }

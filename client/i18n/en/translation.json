@@ -104,5 +104,8 @@
   "save": "Save",
   "changesSaved": "Changes saved",
   "loginRequired": "You have to be logged in to manage settings",
-  "creator": "Creator"
+  "creator": "Creator",
+  "profile": "My  account",
+  "myInventories": "My inventories",
+  "writableInventories": "Writable Inven."
 }

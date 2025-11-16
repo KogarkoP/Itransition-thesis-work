@@ -3,22 +3,20 @@ import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import { getAllInventories } from "./api/inventoryFetch";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import InventoryRow from "@/components/InventoryRow/InventoryRow";
 import * as Icon from "react-bootstrap-icons";
-import Select, { SingleValue } from "react-select";
-import { selectStyles } from "@/styles/selectStyle";
+import { SingleValue } from "react-select";
 import InventoryForm from "@/components/InventoryForm/InventoryForm";
-import { useApp } from "@/context/AppContext";
 import { Inventory } from "@/types/inventory";
 import { deleteInventoriesByIds } from "./api/inventoryFetch";
 import { Option } from "@/types/selectOption";
+import Toolbar from "@/components/Toolbar/Toolbar";
 
 const MainPage = () => {
   const { t, i18n } = useTranslation();
-  const { isDarkMode, isLoggedIn } = useApp();
   const [inventories, setInventories] = useState<Inventory[] | []>([]);
-  const [inventoryForm, setInventoryForm] = useState(false);
+  const [inventoryForm, setInventoryForm] = useState<boolean>(false);
   const [isCreated, setCreated] = useState<boolean>(false);
   const [inventoriesIds, setInventoriesIds] = useState<string[]>([]);
   const [filter, setFilter] = useState<Option>({
@@ -108,41 +106,14 @@ const MainPage = () => {
           />
         )}
         <h1>{t("inventories")}</h1>
-        <div className={styles.toolbar}>
-          <ul className={styles.buttons_wrapper}>
-            <li>
-              <Button
-                disabled={!isLoggedIn}
-                className={styles.insert_btn}
-                onClick={toggleInventoryForm}
-              >
-                {t("add")}
-              </Button>
-            </li>
-            <li>
-              <Button
-                className="btn btn-danger"
-                disabled={!isLoggedIn || inventoriesIds.length <= 0}
-                onClick={() => deleteInventories(inventoriesIds)}
-              >
-                <Icon.Trash3Fill />
-              </Button>
-            </li>
-          </ul>
-          <ul className={styles.filter_wrapper}>
-            <li>
-              <Select
-                className={styles.inventory_filter}
-                inputId="inventory_filter"
-                instanceId="inventory_filter"
-                value={filter}
-                onChange={changeFilter}
-                options={filterOptions}
-                styles={selectStyles(isDarkMode)}
-              />
-            </li>
-          </ul>
-        </div>
+        <Toolbar
+          ids={inventoriesIds}
+          filter={filter}
+          filterOptions={filterOptions}
+          changeFilter={changeFilter}
+          deleteSomething={deleteInventories}
+          toggleForm={toggleInventoryForm}
+        />
         {filteredInventories && filteredInventories.length > 0 ? (
           <Table responsive className={styles.inventories_table}>
             <thead>

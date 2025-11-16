@@ -104,5 +104,8 @@
   "save": "Išsaugoti",
   "changesSaved": "Pakeitimai išsaugoti",
   "loginRequired": "Norint tvarkyti nustatymus, turite prisijungti",
-  "creator": "Kūrėjas"
+  "creator": "Kūrėjas",
+  "profile": "Mano  paskyra",
+  "myInventories": "Mano inventoriai",
+  "writableInventories": "Red. inventoriai"
 }

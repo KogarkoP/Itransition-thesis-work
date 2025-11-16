@@ -55,6 +55,7 @@
   border-color: var(--but-border-color);
 }
 
+.login_btn svg,
 .nav_side_bar_btn svg {
   font-size: 21px;
   color: #fff;

@@ -13,36 +13,6 @@
   font-size: 24px;
   margin-bottom: 1rem;
 }
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 4px;
-  padding: 12px;
-  background-color: var(--toolbar-bg-color);
-  margin-bottom: 1rem;
-}
-
-.buttons_wrapper li:first-child button {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.buttons_wrapper {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.buttons_wrapper .insert_btn {
-  background-color: var(--but-bg-color);
-  border-color: var(--but-border-color);
-}
-
-.buttons_wrapper .insert_btn:hover {
-  background-color: var(--but-bghover-color);
-  border-color: var(--but-borderho-color);
-}
 
 .inventories_table {
   width: 100%;
@@ -53,11 +23,6 @@
 .table_heading th {
   font-weight: 700;
   font-size: 17px;
-}
-
-.filter_select {
-  width: 160px;
-  font-size: 15px;
 }
 
 .checkbox_con {
@@ -161,36 +126,8 @@
     padding: 0 1rem;
   }
 
-  .toolbar {
-    padding: 5px;
-  }
-
   .table_heading th {
     padding: 5px 3px;
     font-size: 15px;
-  }
-
-  .filter_wrapper li select {
-    padding: 5px;
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .toolbar {
-    align-items: flex-end;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .buttons_wrapper {
-    text-align: left;
-    width: 100%;
-    gap: 0.8rem;
-    order: 2;
-  }
-
-  .filter_select {
-    order: 1;
   }
 }
