@@ -55,7 +55,7 @@ const CREATE_CONTACT = async (accessToken, instanceUrl, user, accountId) => {
   return response.data.id;
 };
 
-export const SYNC_USER_TO_SALES_FORCE = async (req, res) => {
+export const SYNC_USER_TO_SALESFORCE = async (req, res) => {
   try {
     const user = req.body;
 

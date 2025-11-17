@@ -108,5 +108,6 @@
   "myInventories": "Mano inventoriai",
   "writableInventories": "Red. inventoriai",
   "lastName": "Pavardė",
-  "companyName": "Įmonės pavadinimas"
+  "companyName": "Įmonės pavadinimas",
+  "phone": "Telefono numeris"
 }
