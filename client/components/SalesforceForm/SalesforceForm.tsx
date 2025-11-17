@@ -61,11 +61,11 @@ export default function SalesforceSyncForm({
       };
 
       const result = await syncUserToSalesforce(userData);
-      if (result.success) {
-        setMessage("Successfully synced to Salesforce!");
-      } else {
-        setMessage("Sync failed: " + (result.error || "Unknown error"));
-      }
+      // if (result.success) {
+      //   setMessage("Successfully synced to Salesforce!");
+      // } else {
+      //   setMessage("Sync failed: " + (result.error || "Unknown error"));
+      // }
     } catch (err: unknown) {
       console.error(err);
       if (err instanceof Error) {
