@@ -3,20 +3,16 @@ import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import { getAllInventories } from "./api/inventoryFetch";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
-import InventoryRow from "@/components/InventoryRow/InventoryRow";
-import * as Icon from "react-bootstrap-icons";
 import { SingleValue } from "react-select";
 import InventoryForm from "@/components/InventoryForm/InventoryForm";
 import { Inventory } from "@/types/inventory";
 import { deleteInventoriesByIds } from "./api/inventoryFetch";
 import { Option } from "@/types/selectOption";
 import Toolbar from "@/components/Toolbar/Toolbar";
-import { useApp } from "@/context/AppContext";
+import InventoriesTable from "@/components/InventoriesTable/InventoriesTable";
 
 const MainPage = () => {
   const { t, i18n } = useTranslation();
-  const { isLoggedIn } = useApp();
   const [inventories, setInventories] = useState<Inventory[] | []>([]);
   const [inventoryForm, setInventoryForm] = useState<boolean>(false);
   const [isCreated, setCreated] = useState<boolean>(false);
@@ -114,57 +110,12 @@ const MainPage = () => {
           deleteSomething={deleteInventories}
           toggleForm={toggleInventoryForm}
         />
-        {filteredInventories && filteredInventories.length > 0 ? (
-          <Table responsive className={styles.inventories_table}>
-            <thead>
-              <tr className={styles.table_heading}>
-                <th className={styles.checkbox_con}>
-                  <input
-                    type="checkbox"
-                    id="select_all"
-                    disabled={!isLoggedIn}
-                    checked={
-                      filteredInventories.length > 0 &&
-                      filteredInventories.every((i) =>
-                        inventoriesIds.includes(i.id)
-                      )
-                    }
-                    onChange={toggleCheckboxes}
-                  />
-                </th>
-                <th>{t("id")}</th>
-                <th>{t("title")}</th>
-                <th>{t("category")}</th>
-                <th>{t("createdAt")}</th>
-                <th>{t("lastUpdate")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredInventories.map((inventory) => {
-                return (
-                  <InventoryRow
-                    key={inventory.id}
-                    id={inventory.id}
-                    title={inventory.title}
-                    category={inventory.category}
-                    createdAt={inventory.createdAt}
-                    updatedAt={inventory.updatedAt}
-                    inventoriesIds={inventoriesIds}
-                    setInventoriesIds={selectedInventoriesIds}
-                  />
-                );
-              })}
-            </tbody>
-          </Table>
-        ) : (
-          <div className={styles.notification_wrapper}>
-            <div className={styles.nothing_found_con}>
-              <Icon.Search className={styles.search_icon} />
-              <Icon.Question className={styles.question_icon} />
-            </div>
-            <p>{t("nothingFound")}</p>
-          </div>
-        )}
+        <InventoriesTable
+          inventoriesIds={inventoriesIds}
+          filteredInventories={filteredInventories}
+          toggleCheckboxes={toggleCheckboxes}
+          setInventoriesIds={selectedInventoriesIds}
+        />
       </div>
     </PageTemplate>
   );

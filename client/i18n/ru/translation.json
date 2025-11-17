@@ -1,6 +1,5 @@
 {
   "users": "Пользователи",
-  "noUsersFound": "Пользователи не найдены....",
   "inventory": "Инвентарь",
   "inventories": "Инвентари",
   "block": "Заблокировать",
@@ -107,5 +106,8 @@
   "creator": "Создатель",
   "profile": "Мой аккаунт",
   "myInventories": "Мои инвентари",
-  "writableInventories": "Редак. инвентари"
+  "writableInventories": "Редак. инвентари",
+  "lastName": "Фамилия",
+  "companyName": "Название компании",
+  "phone": "Номер телефона"
 }

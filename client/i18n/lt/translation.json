@@ -1,6 +1,5 @@
 {
   "users": "Vartotojai",
-  "noUsersFound": "Nerasta jokių vartotojų.......",
   "inventory": "Inventorius",
   "inventories": "Inventoriai",
   "block": "Užblokuoti",
@@ -107,5 +106,7 @@
   "creator": "Kūrėjas",
   "profile": "Mano  paskyra",
   "myInventories": "Mano inventoriai",
-  "writableInventories": "Red. inventoriai"
+  "writableInventories": "Red. inventoriai",
+  "lastName": "Pavardė",
+  "companyName": "Įmonės pavadinimas"
 }

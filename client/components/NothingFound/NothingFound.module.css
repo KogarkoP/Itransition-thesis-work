@@ -1,0 +1,30 @@
+.notification_wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.nothing_found_con {
+  margin-top: 3rem;
+  position: relative;
+}
+
+.nothing_found_con .search_icon {
+  width: 100px;
+  height: 100px;
+}
+
+.nothing_found_con .question_icon {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+}
+
+.notification_wrapper p {
+  font-size: 17px;
+  font-weight: 500;
+}

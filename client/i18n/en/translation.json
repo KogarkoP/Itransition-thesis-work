@@ -1,6 +1,5 @@
 {
   "users": "Users",
-  "noUsersFound": "No Users Found....",
   "inventory": "Inventory",
   "inventories": "Inventories",
   "block": "Block",
@@ -107,5 +106,8 @@
   "creator": "Creator",
   "profile": "My  account",
   "myInventories": "My inventories",
-  "writableInventories": "Writable Inven."
+  "writableInventories": "Writable Inven.",
+  "lastName": "Last Name",
+  "companyName": "Company Name",
+  "phone": "Phone Number"
 }

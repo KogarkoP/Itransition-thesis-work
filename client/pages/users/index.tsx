@@ -19,6 +19,8 @@ import Select, { SingleValue } from "react-select";
 import { selectStyles } from "@/styles/selectStyle";
 import { useApp } from "@/context/AppContext";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
+import TableHead from "@/components/TableHead/TableHead";
+import NothingFound from "@/components/NothingFound/NothingFound";
 
 const UsersPage = () => {
   const { t, i18n } = useTranslation();
@@ -228,28 +230,16 @@ const UsersPage = () => {
           </div>
           {filteredUsers && filteredUsers.length > 0 ? (
             <Table responsive className={styles.users_table}>
-              <thead>
-                <tr className={styles.table_heading}>
-                  <th className={styles.checkbox_con}>
-                    <input
-                      type="checkbox"
-                      id="select_all"
-                      checked={
-                        filteredUsers.length > 0 &&
-                        filteredUsers.every((u) => usersIds.includes(u.id))
-                      }
-                      onChange={() => {
-                        toggleCheckboxes();
-                      }}
-                    />
-                  </th>
-                  <th>{t("name")}</th>
-                  <th>{t("email")}</th>
-                  <th>{t("role")}</th>
-                  <th>{t("status")}</th>
-                  <th>{t("lastSeen")}</th>
-                </tr>
-              </thead>
+              <TableHead
+                ids={usersIds}
+                firstColumn={t("name")}
+                secondColumn={t("email")}
+                thirdColumn={t("role")}
+                fourthColumn={t("status")}
+                fifthColumn={t("lastSeen")}
+                filteredData={filteredUsers}
+                toggleCheckboxes={toggleCheckboxes}
+              />
               <tbody>
                 {filteredUsers.map((user) => {
                   return (
@@ -271,13 +261,7 @@ const UsersPage = () => {
               </tbody>
             </Table>
           ) : (
-            <div className={styles.notification_wrapper}>
-              <div className={styles.nothing_found_con}>
-                <Icon.Search className={styles.search_icon} />
-                <Icon.Question className={styles.question_icon} />
-              </div>
-              <p>{t("noUsersFound")}</p>
-            </div>
+            <NothingFound />
           )}
         </div>
       </ProtectedRoute>

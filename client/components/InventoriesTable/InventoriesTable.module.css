@@ -1,0 +1,5 @@
+.inventories_table {
+  width: 100%;
+  table-layout: fixed;
+  min-width: 800px;
+}

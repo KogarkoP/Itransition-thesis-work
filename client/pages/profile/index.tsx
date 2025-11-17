@@ -16,6 +16,10 @@ import {
   deleteInventoriesByIds,
   getUserInventories,
 } from "../api/inventoryFetch";
+import InventoriesTable from "@/components/InventoriesTable/InventoriesTable";
+import { Button } from "react-bootstrap";
+import ModalTemplate from "@/components/ModalTemplate/ModalTemplate";
+import SalesforceSyncForm from "@/components/SalesforceForm/SalesforceForm";
 
 const ProfilePage = () => {
   const { t, i18n } = useTranslation();
@@ -26,6 +30,7 @@ const ProfilePage = () => {
   const [inventoriesIds, setInventoriesIds] = useState<string[]>([]);
   const [inventoryForm, setInventoryForm] = useState<boolean>(false);
   const [isCreated, setCreated] = useState<boolean>(false);
+  const [isShowForm, setShowForm] = useState<boolean>(false);
   const [filter, setFilter] = useState<Option>({
     value: "all",
     label: t("all"),
@@ -43,6 +48,12 @@ const ProfilePage = () => {
       return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
     return 0;
   });
+
+  const toggleSalesforceForm = () => {
+    setShowForm((prev) => {
+      return !prev;
+    });
+  };
 
   const toggleCheckboxes = () => {
     setInventoriesIds((prevIds) => {
@@ -65,9 +76,6 @@ const ProfilePage = () => {
     if (!currentUser) return;
     const response = await getUserInventories(currentUser.id);
     setInventories(response.data.inventories);
-    if (response) {
-      console.log(response);
-    }
   };
 
   const selectedInventoriesIds = (inventoryId: string) => {
@@ -116,13 +124,16 @@ const ProfilePage = () => {
 
   return (
     <PageTemplate>
+      {isShowForm && (
+        <SalesforceSyncForm toggleSalesforceForm={toggleSalesforceForm} />
+      )}
       <div className={`${styles.main} ${isDarkMode ? styles.dark : ""}`}>
+        <Button onClick={toggleSalesforceForm}>Saleforce</Button>
         <h1>{t("profile")}</h1>
         <Tabs>
           <TabList>
             <Tab>{t("myInventories")}</Tab>
             <Tab>{t("writableInventories")}</Tab>
-            <Tab>{t("salesForce")}</Tab>
           </TabList>
           <TabPanel>
             <h2>{t("myInventories")}</h2>
@@ -142,6 +153,12 @@ const ProfilePage = () => {
               deleteSomething={deleteInventories}
               toggleForm={toggleInventoryForm}
             />
+            <InventoriesTable
+              inventoriesIds={inventoriesIds}
+              filteredInventories={filteredInventories}
+              toggleCheckboxes={toggleCheckboxes}
+              setInventoriesIds={selectedInventoriesIds}
+            />
           </TabPanel>
           <TabPanel>
             <h2>{t("writableInventories")}</h2>
@@ -150,9 +167,6 @@ const ProfilePage = () => {
               filterOptions={filterOptions}
               changeFilter={changeFilter}
             />
-          </TabPanel>
-          <TabPanel>
-            <h2>{t("salesforceIn")}</h2>
           </TabPanel>
         </Tabs>
       </div>

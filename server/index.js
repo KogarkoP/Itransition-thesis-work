@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import userRouter from "./src/routes/users.js";
 import itemsRouter from "./src/routes/items.js";
 import inventoriesRouter from "./src/routes/inventories.js";
+import salesforceRouter from "./src/routes/salesforce.js";
 import "dotenv/config";
 
 const app = express();
@@ -22,6 +23,7 @@ mongoose
 app.use("/users", userRouter);
 app.use("/items", itemsRouter);
 app.use("/inventories", inventoriesRouter);
+app.use("/salesforce", salesforceRouter);
 
 const PORT = process.env.PORT;
 

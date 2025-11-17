@@ -1,0 +1,55 @@
+.table_heading th {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.checkbox_con {
+  width: 40px;
+  position: relative;
+}
+
+.checkbox_con input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #555;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  outline: none;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.checkbox_con input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  accent-color: #ccc;
+  opacity: 0.6;
+}
+
+.checkbox_con input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.checkbox_con input[type="checkbox"]:checked::after {
+  content: "✔";
+  font-weight: 700;
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 820px) {
+  .table_heading th {
+    padding: 5px 3px;
+    font-size: 15px;
+  }
+}

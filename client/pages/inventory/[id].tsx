@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { Table } from "react-bootstrap";
-import * as Icon from "react-bootstrap-icons";
 import ItemRow from "@/components/ItemRow/ItemRow";
 import { useApp } from "@/context/AppContext";
 import { SingleValue } from "react-select";
@@ -22,6 +21,8 @@ import ItemForm from "@/components/ItemForm/ItemForm";
 import GeneralSettings from "@/components/GeneralSettings/GeneralSettings";
 import { Alert } from "@mui/material";
 import Toolbar from "@/components/Toolbar/Toolbar";
+import TableHead from "@/components/TableHead/TableHead";
+import NothingFound from "@/components/NothingFound/NothingFound";
 
 const InventoryPage = () => {
   const { t, i18n } = useTranslation();
@@ -188,27 +189,16 @@ const InventoryPage = () => {
             />
             {filteredItems && filteredItems.length > 0 ? (
               <Table responsive className={styles.inventories_table}>
-                <thead>
-                  <tr className={styles.table_heading}>
-                    <th className={styles.checkbox_con}>
-                      <input
-                        type="checkbox"
-                        disabled={!isLoggedIn}
-                        id="select_all"
-                        checked={
-                          filteredItems.length > 0 &&
-                          filteredItems.every((i) => itemsIds.includes(i.id))
-                        }
-                        onChange={toggleCheckboxes}
-                      />
-                    </th>
-                    <th>{t("id")}</th>
-                    <th>{t("title")}</th>
-                    <th>{t("price")}, &euro;</th>
-                    <th>{t("createdAt")}</th>
-                    <th>{t("lastUpdate")}</th>
-                  </tr>
-                </thead>
+                <TableHead
+                  ids={itemsIds}
+                  firstColumn={t("id")}
+                  secondColumn={t("title")}
+                  thirdColumn={`${t("price")}, €`}
+                  fourthColumn={t("createdAt")}
+                  fifthColumn={t("lastUpdate")}
+                  filteredData={filteredItems}
+                  toggleCheckboxes={toggleCheckboxes}
+                />
                 <tbody>
                   {filteredItems.map((item) => {
                     return (
@@ -227,13 +217,7 @@ const InventoryPage = () => {
                 </tbody>
               </Table>
             ) : (
-              <div className={styles.notification_wrapper}>
-                <div className={styles.nothing_found_con}>
-                  <Icon.Search className={styles.search_icon} />
-                  <Icon.Question className={styles.question_icon} />
-                </div>
-                <p>{t("nothingFound")}</p>
-              </div>
+              <NothingFound />
             )}
           </TabPanel>
           <TabPanel>
