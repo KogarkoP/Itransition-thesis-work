@@ -21,7 +21,7 @@ export type UserInsert = {
 export type UpdateUser = {
   userId: string;
   userOption: string;
-  userValue: string;
+  userValue: string | boolean;
 };
 
 export type UpdateUsers = {

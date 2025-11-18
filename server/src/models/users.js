@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema(
     emailToken: { type: String, index: true },
     isBlocked: { type: Boolean, default: false },
     lastLogin: { type: Date, default: Date.now() },
+    saleforceSync: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

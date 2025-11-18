@@ -27,7 +27,7 @@ const CREATE_ACCOUNT = async (accessToken, instanceUrl, user) => {
   const response = await axios.post(
     `${instanceUrl}/services/data/v60.0/sobjects/Account`,
     {
-      Name: user.companyName || `${user.firstName} ${user.lastName}`,
+      Name: `${user.firstName} ${user.lastName}`,
       Phone: user.phone || null,
     },
     {
@@ -45,6 +45,7 @@ const CREATE_CONTACT = async (accessToken, instanceUrl, user, accountId) => {
       FirstName: user.firstName,
       LastName: user.lastName,
       Email: user.email,
+      Phone: user.phone,
       AccountId: accountId,
     },
     {
