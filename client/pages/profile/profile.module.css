@@ -37,6 +37,22 @@
   font-weight: 500;
 }
 
+.bttn_wrapper {
+  text-align: right;
+}
+
+.bttn_wrapper .salesforce_btn {
+  background-color: var(--but-bg-color);
+  border-color: var(--but-border-color);
+  margin-bottom: 1rem;
+  width: 200px;
+}
+
+.bttn_wrapper .salesforce_btn:hover {
+  background-color: var(--but-bghover-color);
+  border-color: var(--but-borderho-color);
+}
+
 @media (max-width: 820px) {
   .main {
     padding: 0 1rem;

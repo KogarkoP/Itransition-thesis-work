@@ -85,3 +85,28 @@
 .close_btn svg:hover {
   rotate: 720deg;
 }
+
+.main .submit_btn {
+  margin-top: 0.5rem;
+  background-color: var(--but-bg-color);
+  border-color: var(--but-border-color);
+}
+
+.main .submit_btn:hover {
+  background-color: var(--but-bghover-color);
+  border-color: var(--but-borderho-color);
+}
+
+.message {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}

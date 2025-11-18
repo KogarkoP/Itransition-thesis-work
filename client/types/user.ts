@@ -9,6 +9,7 @@ export type User = {
   lastLogin: Date;
   createdAt: Date;
   updatedAt: Date;
+  saleforceSync: boolean;
 };
 
 export type UserInsert = {

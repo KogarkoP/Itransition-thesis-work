@@ -109,5 +109,6 @@
   "writableInventories": "Writable Inven.",
   "lastName": "Last Name",
   "companyName": "Company Name",
-  "phone": "Phone Number"
+  "phone": "Phone Number",
+  "syncToSalesforce": "Sync. to Salesforce"
 }

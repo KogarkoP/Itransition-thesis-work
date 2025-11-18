@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import styles from "./SalesforceForm.module.css";
 import { syncUserToSalesforce } from "@/pages/api/salesforce";
 import { useApp } from "@/context/AppContext";
@@ -16,13 +16,15 @@ export default function SalesforceSyncForm({
   toggleSalesforceForm,
 }: SalesforceSyncFormProps) {
   const { t } = useTranslation();
-  const { currentUser } = useApp();
+  const { currentUser, fetchCurrentUser } = useApp();
   const [firstName, setFirstName] = useState(currentUser?.name || "");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState(currentUser?.email || "");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isDisabledBtn, setDisabledBtn] = useState<boolean>(false);
+  const [syncError, setSyncError] = useState<boolean>(false);
 
   const handleSubmit = async () => {
     setMessage("");
@@ -48,29 +50,44 @@ export default function SalesforceSyncForm({
         email: email,
         phone: phone,
       };
-      console.log("Calling syncUserToSalesforce...");
+      setDisabledBtn(true);
       const result = await syncUserToSalesforce(userData);
-      console.log(result);
+
       if (result.data.success === true) {
         setMessage("Successfully synced to Salesforce!");
+
         if (!currentUser) {
           console.error("No current user!");
           return;
         }
-        updateUserById({
+
+        const updateUser = await updateUserById({
           userId: currentUser.id,
           userOption: "saleforceSync",
           userValue: true,
         });
-        toggleSalesforceForm();
+
+        if (updateUser.status === 200) {
+          fetchCurrentUser();
+        }
+
+        setTimeout(() => toggleSalesforceForm(), 1500);
+        return;
       }
+      setDisabledBtn(false);
     } catch (err: unknown) {
+      setSyncError(true);
+      setDisabledBtn(false);
       console.error(err);
       if (err instanceof Error) {
         setMessage("Sync failed: " + err.message);
       } else {
         setMessage("Sync failed: Unknown error");
       }
+      setTimeout(() => {
+        setSyncError(false);
+        setMessage("");
+      }, 3000);
     }
   };
 
@@ -173,12 +190,24 @@ export default function SalesforceSyncForm({
               }}
             />
           </div>
-          {errors.street && (
-            <p className={styles.field_error}>{errors.street}</p>
-          )}
+          {errors.phone && <p className={styles.field_error}>{errors.phone}</p>}
         </div>
-        <Button onClick={handleSubmit}>Sync to Salesforce</Button>
-        {message && <p>{message}</p>}
+        <Button
+          className={styles.submit_btn}
+          disabled={isDisabledBtn}
+          onClick={handleSubmit}
+        >
+          {t("syncToSalesforce")}
+        </Button>
+        {message && (
+          <p
+            className={`${styles.message} ${
+              syncError ? styles.error : styles.success
+            }`}
+          >
+            {message}
+          </p>
+        )}
       </div>
     </ModalTemplate>
   );

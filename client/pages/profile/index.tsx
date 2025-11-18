@@ -18,7 +18,6 @@ import {
 } from "../api/inventoryFetch";
 import InventoriesTable from "@/components/InventoriesTable/InventoriesTable";
 import { Button } from "react-bootstrap";
-import ModalTemplate from "@/components/ModalTemplate/ModalTemplate";
 import SalesforceSyncForm from "@/components/SalesforceForm/SalesforceForm";
 
 const ProfilePage = () => {
@@ -128,7 +127,16 @@ const ProfilePage = () => {
         <SalesforceSyncForm toggleSalesforceForm={toggleSalesforceForm} />
       )}
       <div className={`${styles.main} ${isDarkMode ? styles.dark : ""}`}>
-        <Button onClick={toggleSalesforceForm}>Saleforce</Button>
+        <div className={styles.bttn_wrapper}>
+          <Button
+            disabled={currentUser?.saleforceSync}
+            className={styles.salesforce_btn}
+            onClick={toggleSalesforceForm}
+          >
+            {t("syncToSalesforce")}
+          </Button>
+        </div>
+
         <h1>{t("profile")}</h1>
         <Tabs>
           <TabList>

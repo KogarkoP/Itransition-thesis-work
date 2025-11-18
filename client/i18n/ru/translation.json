@@ -109,5 +109,6 @@
   "writableInventories": "Редак. инвентари",
   "lastName": "Фамилия",
   "companyName": "Название компании",
-  "phone": "Номер телефона"
+  "phone": "Номер телефона",
+  "syncToSalesforce": "Син. с Salesforce"
 }

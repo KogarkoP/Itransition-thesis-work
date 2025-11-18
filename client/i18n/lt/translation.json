@@ -109,5 +109,6 @@
   "writableInventories": "Red. inventoriai",
   "lastName": "Pavardė",
   "companyName": "Įmonės pavadinimas",
-  "phone": "Telefono numeris"
+  "phone": "Telefono numeris",
+  "syncToSalesforce": "Sinch. su Salesforce"
 }
