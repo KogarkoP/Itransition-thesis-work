@@ -70,8 +70,7 @@ export default function SalesforceSyncForm({
         if (updateUser.status === 200) {
           fetchCurrentUser();
         }
-
-        setTimeout(() => toggleSalesforceForm(), 1500);
+        setTimeout(() => setMessage(""), 3000);
         return;
       }
       setDisabledBtn(false);
